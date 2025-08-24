@@ -6,10 +6,10 @@ function Logo() {
     <div>
       <Link
         to="/home"
-        className="flex items-center gap-2 font-bold transition-colors hover:bg-slate-700 rounded-md"
+        className="flex items-center gap-2 rounded-md font-bold transition-colors hover:bg-slate-700"
       >
         <HiGlobeAlt />
-        YetAnotherPersonalWebpage
+        YetAnotherPersonalWebsite
       </Link>
     </div>
   );
