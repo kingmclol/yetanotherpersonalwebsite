@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-slate-900 font-mono text-slate-300;
+}
+
+.caret {
+  @apply border-r-2 border-white;
+  animation: caret 1s steps(1) infinite;
+}
+
+@keyframes caret {
+  50% {
+    border-color: transparent;
+  }
+}
