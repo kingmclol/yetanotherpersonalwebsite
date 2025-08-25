@@ -12,7 +12,11 @@ function QACard({ title, children }) {
       >
         Q: {title}
       </motion.h2>
-      <motion.div variants={fadeInFromLeft} className="ml-8 max-w-2xl">
+      <motion.div
+        variants={fadeInFromLeft}
+        transition={{ delayChildren: stagger(0.1) }}
+        className="ml-8 max-w-2xl space-y-4"
+      >
         {children}
       </motion.div>
     </motion.li>

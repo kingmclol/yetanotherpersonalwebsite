@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // Guided by some blog post out there
 // Pretty common way to implement anyways
 
+// TODO: make cursor blink optional (move styles to here instead of index.css)
 function TypeWriterText({
   words = ["You forgot", "to add", "a words array..."],
   delay = 100,

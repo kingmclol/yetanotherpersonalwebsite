@@ -1,10 +1,6 @@
 function Project() {
-	const {projectId}
-	return (
-		<div>
-			
-		</div>
-	)
+  const { projectId };
+  return <div></div>;
 }
 
-export default Project
+export default Project;

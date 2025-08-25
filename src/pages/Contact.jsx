@@ -1,14 +1,27 @@
-import { Link, useOutletContext } from "react-router-dom";
-import ScrollProgress from "../ui/ScrollProgress";
 import { motion } from "motion/react";
-import { fadeInFromLeft } from "../utils/animationVariants";
-import Section from "../ui/Section";
+import { Link } from "react-router-dom";
 import Divider from "../ui/Divider";
+import Section from "../ui/Section";
+import { fadeInFromBottom, fadeInFromLeft } from "../utils/animationVariants";
+import TypeWriterText from "../ui/TypeWriterText";
+import { usePreferences } from "../contexts/PreferencesProvider";
 function Contact() {
-  const { containerRef } = useOutletContext();
+  const { reducedMotion } = usePreferences();
+
   return (
     <>
-      <ScrollProgress containerRef={containerRef} />
+      <motion.h1
+        variants={fadeInFromBottom}
+        initial="initial"
+        animate="animate"
+        className="tacking-wide text-center text-4xl font-bold"
+      >
+        {!reducedMotion ? (
+          <TypeWriterText loop={false} words={["Contacts"]} />
+        ) : (
+          "Contacts"
+        )}
+      </motion.h1>
       <Section>
         <motion.p variants={fadeInFromLeft}>
           Contact links in bigger format here

@@ -22,16 +22,16 @@ function PreferencesContextProvider({ children }) {
     MotionGlobalConfig.skipAnimations = reducedMotion;
   }, [reducedMotion]);
 
-  // // Apply dark or light class to root html element
-  // useEffect(() => {
-  //   if (darkMode) {
-  //     document.documentElement.classList.add("dark");
-  //     document.documentElement.classList.remove("light");
-  //   } else {
-  //     document.documentElement.classList.add("light");
-  //     document.documentElement.classList.remove("dark");
-  //   }
-  // }, [darkMode]);
+  // Apply dark or light class to root html element
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
 
   function toggleReducedMotion() {
     setReducedMotion((prev) => !prev);

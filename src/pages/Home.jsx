@@ -1,18 +1,19 @@
 import { motion } from "motion/react";
 import { FaAnglesDown } from "react-icons/fa6";
 import {
+  HiMiniArrowTopRightOnSquare,
   HiOutlineCircleStack,
   HiOutlineInformationCircle,
   HiOutlineUser,
 } from "react-icons/hi2";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { usePreferences } from "../contexts/PreferencesProvider";
 import { homePageWords } from "../data/homePageWords";
+import Anchor from "../ui/Anchor";
 import Button from "../ui/Button";
 import Divider from "../ui/Divider";
 import QACard from "../ui/QACard";
 import QAList from "../ui/QAList";
-import ScrollProgress from "../ui/ScrollProgress";
 import Section from "../ui/Section";
 import TypeWriterText from "../ui/TypeWriterText";
 import { fadeInFromBottom } from "../utils/animationVariants";
@@ -20,11 +21,9 @@ import { fadeInFromBottom } from "../utils/animationVariants";
 const MotionLink = motion.create(Link);
 
 function Home() {
-  const { containerRef } = useOutletContext();
   const { reducedMotion, toggleReducedMotion } = usePreferences();
   return (
     <>
-      {!reducedMotion && <ScrollProgress containerRef={containerRef} />}
       <Section animateOnce>
         <h1 className="mt-40 text-center text-6xl">
           {!reducedMotion ? (
@@ -63,7 +62,7 @@ function Home() {
       </Section>
       <Divider animateOnce />
       <motion.div className="mb-[60vh] flex items-center justify-center gap-2">
-        <FaAnglesDown /> Scroll down for some Not very FAQ (so the scroll
+        <FaAnglesDown /> Scroll down for some Not very FAQ (to let the entry
         animations trigger)
         <FaAnglesDown />
       </motion.div>
@@ -94,13 +93,14 @@ function Home() {
             <p>
               Look at the site without animations! It's way more boring that
               way. In my opinion, of course.
-              <br />
-              <br />
+            </p>
+            <p>
               It's <span className="text-xs">supposed</span> to be easy to do
               for quite large benefit. Key word being "supposed" since I'm
               having a bad time right now as this library is like what
-              <br />
-              <br />I won't deny that I may have gone a bit... overboard on this
+            </p>
+            <p>
+              I won't deny that I may have gone a bit... overboard on this
               though since I'm treating it as a learning opportunity now. Just
               turn off them with the button above if they're too distracting.
             </p>
@@ -109,6 +109,25 @@ function Home() {
             <p>
               CSS is the stuff of nightmares man, I'm just hoping that
               tailwind's tastefully chosen classes can save me
+            </p>
+          </QACard>
+          <QACard title="I found a problem. Where report?">
+            <p>
+              <span className="line-through">
+                Uh if it's a performance problem i'm probably cooked
+              </span>{" "}
+              You can contact me, I guess. But adding an issue on the{" "}
+              <Anchor href="">
+                github
+                <HiMiniArrowTopRightOnSquare />
+              </Anchor>{" "}
+              would probably work well enough.
+            </p>
+            <p>
+              But animations sometimes failing to run is 100% not fixable (I'm
+              way out of my league here this was supposed to be a quick 20
+              minute adventure, in and out), and the bigger problem being that I
+              literally cannot reproduce them so...
             </p>
           </QACard>
         </QAList>

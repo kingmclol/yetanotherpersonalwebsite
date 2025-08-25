@@ -1,4 +1,10 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  ScrollRestoration,
+} from "react-router-dom";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
@@ -9,29 +15,63 @@ import { PreferencesContextProvider } from "./contexts/PreferencesProvider";
 import BrokenPage from "./pages/BrokenPage";
 import ErrorFallback from "./ui/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {},
+  },
+});
+
+// TODO: Use a data router with createBrowserRouter so can use ScrollRestoration
 
 function App() {
   return (
-    <PreferencesContextProvider>
-      <BrowserRouter>
-        <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => {}}>
-          <Routes>
-            <Route element={<AppLayout />}>
-              <Route index element={<Navigate replace to="/home" />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="*" element={<PageNotFound />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route
-                path="/i-want-to-break-this-website"
-                element={<BrokenPage />}
-              />
-            </Route>
-          </Routes>
-        </ErrorBoundary>
-      </BrowserRouter>
-    </PreferencesContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <Toaster
+        position="bottom-right"
+        gutter={0}
+        containerStyle={{ margin: "8px" }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "var(--color-grey-0)",
+            color: "var(--color-grey-700)",
+          },
+        }}
+      />
+      <PreferencesContextProvider>
+        <BrowserRouter>
+          <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => {}}>
+            <Routes>
+              <Route element={<AppLayout />}>
+                <Route index element={<Navigate replace to="/home" />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="*" element={<PageNotFound />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route
+                  path="/i-want-to-break-this-website"
+                  element={<BrokenPage />}
+                />
+              </Route>
+            </Routes>
+          </ErrorBoundary>
+        </BrowserRouter>
+      </PreferencesContextProvider>
+    </QueryClientProvider>
   );
 }
 

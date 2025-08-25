@@ -14,3 +14,6 @@ body {
     border-color: transparent;
   }
 }
+
+/* Light variant like light:bg-sky-50 */
+@custom-variant light (&:where(.light, .light *));

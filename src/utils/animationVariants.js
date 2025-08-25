@@ -7,7 +7,12 @@ export const fadeInFromBottom = {
     opacity: 1,
     y: 0,
   },
+  exit: {
+    opacity: 0,
+    y: -50,
+  },
 };
+export const noAnimation = {};
 
 export const fadeInFromLeft = {
   initial: {
@@ -17,6 +22,10 @@ export const fadeInFromLeft = {
   animate: {
     opacity: 1,
     x: 0,
+  },
+  exit: {
+    opacity: 0,
+    x: 50,
   },
 };
 
@@ -35,5 +44,8 @@ export const fadeIn = {
   },
   animate: {
     opacity: 1,
+  },
+  exit: {
+    opacity: 0,
   },
 };

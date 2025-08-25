@@ -1,13 +1,14 @@
 import { motion, stagger } from "motion/react";
 import { fadeInFromLeft } from "../utils/animationVariants";
 
-const variants = fadeInFromLeft;
 function Section({
   children,
   className,
   animateOnce = false,
   staggerChildren = 0.2,
   delayChildren = 0,
+  variants = fadeInFromLeft,
+  duration = 0.4,
 }) {
   return (
     <motion.div
@@ -16,7 +17,7 @@ function Section({
       initial="initial"
       whileInView="animate"
       transition={{
-        duration: 0.5,
+        duration,
         delayChildren: stagger(staggerChildren, {
           startDelay: delayChildren,
         }),

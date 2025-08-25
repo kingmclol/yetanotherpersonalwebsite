@@ -45,7 +45,7 @@ function getNavLinkClass({ isActive }) {
 
 function Navbar() {
   return (
-    <nav className="flex items-center justify-between border-b-2 border-slate-400 bg-slate-800 px-4 py-2">
+    <nav className="light:bg-sky-50 flex items-center justify-between border-b-2 border-slate-400 bg-slate-800 px-4 py-2">
       <Logo />
       <ul className="flex gap-4">
         {links.map((link) => (
