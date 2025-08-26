@@ -95,7 +95,7 @@ function Modal({ children }) {
   );
 }
 
-function Open({ renderButton, window: windowName }) {
+function Open({ renderButton, target: windowName }) {
   const { open } = useContext(ModalContext);
   return renderButton(() => open(windowName));
 }
@@ -120,12 +120,15 @@ function Open({ renderButton, window: windowName }) {
 const overlayVariants = {
   initial: {
     backdropFilter: "blur(0px)",
+    backgroundColor: "none",
   },
   animate: {
     backdropFilter: "blur(4px)",
+    backgroundColor: "rgba(0,0,0, 0.5)",
   },
   exit: {
     backdropFilter: "blur(0px)",
+    backgroundColor: "none",
   },
 };
 function Window({ name, renderChildren, titleText, children }) {
@@ -144,7 +147,6 @@ function Window({ name, renderChildren, titleText, children }) {
           variants={overlayVariants}
           initial="initial"
           animate="animate"
-          transition={{ duration: 0.1 }}
           exit="exit"
         >
           <motion.div
@@ -152,14 +154,14 @@ function Window({ name, renderChildren, titleText, children }) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="fixed top-1/2 left-1/2 min-h-80 min-w-2xl -translate-1/2 transform rounded-xl border-2 border-slate-700 bg-slate-900 px-12 py-16 shadow-lg"
+            className="fixed top-1/2 left-1/2 min-h-80 min-w-2xl -translate-1/2 transform rounded-xl border-2 border-slate-700 bg-slate-900 px-8 py-12 shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
             <Button
-              className="fixed top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full hover:bg-slate-700"
+              className="fixed top-2 right-2 flex p-1 items-center justify-center rounded-full hover:bg-slate-700"
               onClick={close}
             >
-              <HiXMark className="h-6 w-6" />
+              <HiXMark className="h-8 w-8" />
             </Button>
             {titleText && <Title>{titleText}</Title>}
             {renderChildren ? renderChildren(close) : children}

@@ -17,3 +17,7 @@ body {
 
 /* Light variant like light:bg-sky-50 */
 @custom-variant light (&:where(.light, .light *));
+
+li {
+  @apply list-none
+}

@@ -1,9 +1,10 @@
+import { format } from "date-fns";
 import { motion } from "motion/react";
+import { HiMiniArrowTopRightOnSquare, HiOutlineUsers } from "react-icons/hi2";
+import Divider from "../../ui/Divider";
+import Modal from "../../ui/Modal";
 import { fadeInFromBottom } from "../../utils/animationVariants";
 import { getImageUrl } from "../../utils/helpers";
-import Divider from "../../ui/Divider";
-import { format } from "date-fns";
-import { HiOutlineUsers } from "react-icons/hi2";
 function ProjectCard({ project }) {
   const {
     id,
@@ -20,47 +21,110 @@ function ProjectCard({ project }) {
     tool_others: otherTools,
   } = project;
 
-  const imageUrl = getImageUrl(imagePath);
   return (
-    <motion.div
-      variants={fadeInFromBottom}
-      whileHover={{
-        scale: 1.02,
-      }}
-      whileTap={{
-        scale: 0.96,
-      }}
-      className="flex flex-col rounded-xl border-4 border-slate-600 bg-slate-700 transition-colors hover:border-slate-400"
-    >
-      <div className="aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-800">
-        <img
-          className="h-full w-full object-cover"
-          src={imageUrl}
-          alt={title}
-        />
-      </div>
-      <div className="flex flex-1 flex-col justify-between px-4 py-4">
-        <div>
-          <h2 className="mb-2 text-center text-2xl font-semibold tracking-wide text-slate-200">
-            {title}
-          </h2>
-          <p className="text-md text-center text-slate-400 italic">
-            "{tagline}"
-          </p>
-          <Divider noAnimate spacing="tiny" />
-          <p className="line-clamp-3 px-4">{description}</p>
-        </div>
-        <div className="mt-2 flex justify-between">
-          <p className="flex gap-2 items-center">
-            <HiOutlineUsers /> {teamSize === 1 ? "solo" : teamSize}
-          </p>
-          <div>
-            {format(new Date(startDate), "MMM yyyy")} &mdash;{" "}
-            {endDate ? format(new Date(endDate), "MMM yyyy") : "now"}
+    <>
+      {/* <Modal.Open
+        target={id}
+        renderButton={(openFunc) => <div onClick={openFunc}>Open {id}</div>}
+      />
+      <Modal.Window name={id}>{id}</Modal.Window> */}
+      <Modal.Open
+        target={id}
+        renderButton={(openFunc) => (
+          <motion.div
+            variants={fadeInFromBottom}
+            onClick={openFunc}
+            whileHover={{
+              scale: 1.02,
+            }}
+            whileTap={{
+              scale: 0.96,
+            }}
+            className="flex cursor-pointer flex-col rounded-xl border-4 border-slate-600 bg-slate-700 transition-colors hover:border-slate-400"
+          >
+            <div className="aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-800">
+              {imagePath ? (
+                <img
+                  className="h-full w-full object-cover"
+                  src={getImageUrl(imagePath)}
+                  alt={title}
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-4xl font-extrabold tracking-wider uppercase">
+                  No image found
+                </div>
+              )}
+            </div>
+            <div className="flex flex-1 flex-col justify-between px-4 py-4">
+              <div>
+                <h2 className="mb-2 text-center text-2xl font-semibold tracking-wide text-slate-200">
+                  {title}
+                </h2>
+                <p className="text-md text-center text-slate-400 italic">
+                  "{tagline}"
+                </p>
+                <Divider noAnimate spacing="tiny" />
+                <p className="line-clamp-3 px-4">{description}</p>
+              </div>
+              <div className="mt-2 flex justify-between">
+                <p className="flex items-center gap-2">
+                  <HiOutlineUsers /> {teamSize === 1 ? "solo" : teamSize}
+                </p>
+                <div>
+                  {format(new Date(startDate), "MMM yyyy")} &mdash;{" "}
+                  {endDate ? format(new Date(endDate), "MMM yyyy") : "now"}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      />
+      <Modal.Window name={id}>
+        <div className="flex flex-col rounded-xl border-4 border-slate-600 bg-slate-700 transition-colors">
+          <div className="aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-800">
+            {imagePath ? (
+              <img
+                className="h-full w-full object-cover"
+                src={getImageUrl(imagePath)}
+                alt={title}
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center text-4xl font-extrabold tracking-wider uppercase">
+                No image found
+              </div>
+            )}
+          </div>
+          <div className="flex flex-1 flex-col justify-between px-4 py-4">
+            <div>
+              <h2 className="mb-2 text-center text-2xl font-semibold tracking-wide text-slate-200">
+                <a
+                  className="flex justify-center hover:underline"
+                  href={projectUrl}
+                  target="_blank"
+                >
+                  {title}
+                  <HiMiniArrowTopRightOnSquare />
+                </a>
+              </h2>
+              <p className="text-md text-center text-slate-400 italic">
+                "{tagline}"
+              </p>
+              <Divider noAnimate spacing="tiny" />
+              <p className="px-4">{description}</p>
+            </div>
+            <div className="mt-2 flex justify-between">
+              <p className="flex items-center gap-2">
+                <HiOutlineUsers /> {teamSize === 1 ? "solo" : teamSize}
+              </p>
+              <div>
+                {format(new Date(startDate), "MMM yyyy")} &mdash;{" "}
+                {endDate ? format(new Date(endDate), "MMM yyyy") : "now"}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </motion.div>
+      </Modal.Window>
+    </>
   );
 }
 

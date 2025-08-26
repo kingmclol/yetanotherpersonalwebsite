@@ -1,4 +1,5 @@
 import LoadingAnimation from "../../ui/LoadingAnimation";
+import Modal from "../../ui/Modal";
 import Section from "../../ui/Section";
 import {
   fadeIn,
@@ -31,9 +32,11 @@ function ProjectList({ projects }) {
         </Section>
       ) : (
         <Section variants={noAnimation} className="grid grid-cols-2 gap-4">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+          <Modal>
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </Modal>
           {/* <ProjectCard project={projects[0]} />
           <ProjectCard project={projects[0]} />
           <ProjectCard project={projects[0]} />

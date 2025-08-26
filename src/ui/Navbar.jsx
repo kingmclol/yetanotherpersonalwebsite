@@ -54,6 +54,7 @@ function Navbar() {
             variants={variants}
             whileHover="hover"
             whileTap="tap"
+            tabIndex={-1}
           >
             <NavLink className={getNavLinkClass} to={link.to}>
               {link.label}

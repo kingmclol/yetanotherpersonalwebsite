@@ -19,6 +19,8 @@ import TypeWriterText from "../ui/TypeWriterText";
 import { fadeInFromBottom } from "../utils/animationVariants";
 import { getProjectImage } from "../services/apiProjects";
 import SectionHeader from "../ui/SectionHeader";
+import LinkCard from "../ui/LinkCard";
+import SectionList from "../ui/SectionList";
 
 const MotionLink = motion.create(Link);
 
@@ -133,17 +135,39 @@ function Home() {
               jsdocs
             </p>
             <p>
-              ...You can definitely tell that I'm struggling to find content to put here.
+              ...You can definitely tell that I'm struggling to find content to
+              put here.
             </p>
           </QACard>
         </QAList>
       </Section>
       <Divider />
-      <Section className="text-center">
-        <h2 className="mx-auto mb-6 max-w-[500px] text-xl font-semibold tracking-wide">
+      <Section>
+        <SectionHeader>
           Head on over to one of THREE brand-new pages for some new content!
-        </h2>
-        <motion.div className="grid grid-cols-3 gap-2">
+        </SectionHeader>
+
+        <SectionList>
+          <LinkCard
+            to="/about"
+            name="About"
+            comment="Extra stuff about me"
+            Icon={HiOutlineInformationCircle}
+          />
+          <LinkCard
+            to="/projects"
+            name="Projects"
+            comment="I can't think of a comment to put here"
+            Icon={HiOutlineCircleStack}
+          />
+          <LinkCard
+            to="/contact"
+            name="Contact"
+            comment="Stuff you can see in the footer"
+            Icon={HiOutlineUser}
+          />
+        </SectionList>
+        {/* <motion.div className="grid grid-cols-3 gap-2">
           <MotionLink
             variants={fadeInFromBottom}
             className="flex max-w-3xs flex-col items-center justify-start rounded-2xl py-2 transition-colors hover:bg-slate-800"
@@ -175,7 +199,7 @@ function Home() {
               Stuff you can see in the footer
             </p>
           </MotionLink>
-        </motion.div>
+        </motion.div> */}
       </Section>
     </>
   );

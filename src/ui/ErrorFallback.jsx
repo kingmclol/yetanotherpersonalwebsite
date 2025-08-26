@@ -22,7 +22,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
         }}
         initial="initial"
         animate="animate"
-        className="flex h-3/4 max-h-96 w-3/4 max-w-4xl flex-col justify-around gap-8 border-2 border-slate-700 px-8 py-8"
+        className="flex w-3/4 max-w-4xl flex-col justify-around gap-8 border-2 border-slate-700 px-8 py-8"
       >
         <motion.div
           variants={variants}

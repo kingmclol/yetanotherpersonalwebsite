@@ -1,16 +1,16 @@
 import { motion, stagger } from "motion/react";
 import { noAnimation } from "../utils/animationVariants";
 
-function Section({
+function SectionList({
   children,
-  className,
+  className = "flex flex-col gap-4 justify-center items-center",
   animateOnce = false,
   staggerChildren = 0.2,
   delayChildren = 0,
   variants = noAnimation,
 }) {
   return (
-    <motion.div
+    <motion.ul
       className={className}
       variants={variants}
       initial="initial"
@@ -27,8 +27,8 @@ function Section({
       }}
     >
       {children}
-    </motion.div>
+    </motion.ul>
   );
 }
 
-export default Section;
+export default SectionList;

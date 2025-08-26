@@ -13,6 +13,7 @@ function AppLayout() {
       <Navbar />
       <main
         ref={containerRef}
+        tabIndex={-1}
         className="flex flex-col items-center overflow-auto px-8 pt-8 pb-2"
       >
         <div className="max-w-4xl flex-1">

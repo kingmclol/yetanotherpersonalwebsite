@@ -7,18 +7,18 @@ const contacts = [
   {
     name: "LinkedIn",
     url: "https://www.linkedin.com/in/freeman-wang/",
-    comment: "LinkedIn. Essentially empty, and rarely checked.",
+    comment: "",
   },
   {
     name: "Instagram",
     url: "https://www.instagram.com/kingmclol100/",
-    comment: "Instagram. private account so dunno why i put it here",
+    comment:
+      "i don't post anything—basically another source of direct messages",
   },
   {
     name: "Discord",
     url: "https://discord.com/users/327862753912160258",
-    comment:
-      "I respond quickly here, but there's usually nothing to respond to lol",
+    comment: "Hopefully I remembered to enable requests from everyone",
   },
   {
     name: "Email",
