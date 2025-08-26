@@ -4,7 +4,7 @@ function QAList({ children }) {
   return (
     <motion.ul
       variants={fadeInFromBottom}
-      className="space-y-8 text-left"
+      className="space-y-8"
       whileInView="animate"
       initial="initial"
       transition={{

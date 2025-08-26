@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 // Pretty common way to implement anyways
 
 // TODO: make cursor blink optional (move styles to here instead of index.css)
+// TODO: Make deleting word instant if delayDelete is 0
 function TypeWriterText({
   words = ["You forgot", "to add", "a words array..."],
   delay = 100,
@@ -10,6 +11,7 @@ function TypeWriterText({
   delayNextWord = 1000,
   delayDelete = 50,
   loop = true,
+  showCursor = true,
 }) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -78,7 +80,7 @@ function TypeWriterText({
     state,
     words,
   ]);
-  return <span className="caret">{displayText}</span>;
+  return <span className={showCursor ? "caret" : ""}>{displayText}</span>;
 }
 
 export default TypeWriterText;

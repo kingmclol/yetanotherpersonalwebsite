@@ -1,33 +1,18 @@
-import { motion } from "motion/react";
 import toast from "react-hot-toast";
-import { usePreferences } from "../contexts/PreferencesProvider";
 import ProjectList from "../features/projects/ProjectList";
 import { useProjects } from "../features/projects/useProjects";
 import Button from "../ui/Button";
 import Divider from "../ui/Divider";
 import Modal from "../ui/Modal";
-import TypeWriterText from "../ui/TypeWriterText";
-import { fadeInFromBottom } from "../utils/animationVariants";
+import PageTitle from "../ui/PageTitle";
+import Section from "../ui/Section";
 
 function Projects() {
   const { projects } = useProjects();
-  const { reducedMotion } = usePreferences();
   return (
-    <div>
-      <motion.h1
-        variants={fadeInFromBottom}
-        initial="initial"
-        animate="animate"
-        className="tacking-wide text-center text-4xl font-bold"
-      >
-        {!reducedMotion ? (
-          <TypeWriterText loop={false} words={["Projects"]} />
-        ) : (
-          "Projects"
-        )}
-      </motion.h1>
-      <Divider />
-      <button onClick={() => toast.success("Eeee")}>click</button>
+    <>
+      <PageTitle title="Projects" subtitle="Basically school projects" />
+      {/* <button onClick={() => toast.success("Eeee")}>click</button>
       <Modal>
         <Modal.Open
           window={"main"}
@@ -39,7 +24,7 @@ function Projects() {
         <Modal.Window name="main" titleText={"asefs"}>
           test
         </Modal.Window>
-      </Modal>
+      </Modal> */}
       <ProjectList projects={projects} />
       {/* <ContextMenu>
         <ContextMenu.Toggle id="1" />
@@ -51,7 +36,7 @@ function Projects() {
           </ContextMenu.List>
         </ContextMenu.Menu>
       </ContextMenu> */}
-    </div>
+    </>
   );
 }
 

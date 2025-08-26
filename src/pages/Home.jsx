@@ -17,14 +17,17 @@ import QAList from "../ui/QAList";
 import Section from "../ui/Section";
 import TypeWriterText from "../ui/TypeWriterText";
 import { fadeInFromBottom } from "../utils/animationVariants";
+import { getProjectImage } from "../services/apiProjects";
+import SectionHeader from "../ui/SectionHeader";
 
 const MotionLink = motion.create(Link);
 
 function Home() {
+  console.log(getProjectImage(1));
   const { reducedMotion, toggleReducedMotion } = usePreferences();
   return (
     <>
-      <Section animateOnce>
+      <Section>
         <h1 className="mt-40 text-center text-6xl">
           {!reducedMotion ? (
             <TypeWriterText
@@ -40,12 +43,11 @@ function Home() {
           )}
         </h1>
       </Section>
-      <Divider animateOnce />
+      <Divider noAnimate />
       <Section
         className="rounded-md bg-slate-600 px-4 py-4 text-center italic"
         delayChildren={1}
         staggerChildren={1}
-        animateOnce
       >
         <h2 className="mb-4 text-2xl font-semibold tracking-wide not-italic">
           Welcome to my website. Everything is quite messy, though.
@@ -54,13 +56,13 @@ function Home() {
           ...I definitely shouldn't have tried motion.
         </motion.p>
         <motion.p variants={fadeInFromBottom}>
-          It's, um, very confusing.
+          I literally cannot debug this stuff
         </motion.p>
         <motion.p variants={fadeInFromBottom}>
-          But animations are cool...
+          ...but animations are cool...
         </motion.p>
       </Section>
-      <Divider animateOnce />
+      <Divider noAnimate />
       <motion.div className="mb-[60vh] flex items-center justify-center gap-2">
         <FaAnglesDown /> Scroll down for some Not very FAQ (to let the entry
         animations trigger)
@@ -68,13 +70,8 @@ function Home() {
       </motion.div>
 
       <Divider />
-      <Section className="rounded-md px-4 text-center">
-        <motion.h2
-          variants={fadeInFromBottom}
-          className="mb-8 text-2xl font-semibold tracking-wide"
-        >
-          Not very FAQ
-        </motion.h2>
+      <Section className="rounded-md px-4">
+        <SectionHeader>Not very FAQ</SectionHeader>
         <QAList>
           <QACard
             title={
@@ -121,13 +118,22 @@ function Home() {
                 github
                 <HiMiniArrowTopRightOnSquare />
               </Anchor>{" "}
-              would probably work well enough.
+              would probably work well enough. Not that you have any obligation
+              to do so or anything
+            </p>
+          </QACard>
+          <QACard title="How much of this is AI?">
+            <p>
+              most code is mine (you can tell from it being terrible), i only
+              really use it when styling is kicking my butt + motion
+              documentation being as clear as orange juice from concentrate
             </p>
             <p>
-              But animations sometimes failing to run is 100% not fixable (I'm
-              way out of my league here this was supposed to be a quick 20
-              minute adventure, in and out), and the bigger problem being that I
-              literally cannot reproduce them so...
+              oh yeah and also debugging some stuff (motion ofc) + writing some
+              jsdocs
+            </p>
+            <p>
+              ...You can definitely tell that I'm struggling to find content to put here.
             </p>
           </QACard>
         </QAList>

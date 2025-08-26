@@ -1,7 +1,6 @@
 import { motion, stagger } from "motion/react";
 import { fadeInFromBottom } from "../utils/animationVariants";
 import Button from "./Button";
-import sticker from "/src/assets/ganyu_upset.webp";
 import { useNavigate } from "react-router-dom";
 // Slide in from bottom
 const variants = fadeInFromBottom;
@@ -45,7 +44,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
             }}
             animate={{ rotate: 0 }}
             className="h-32 w-32"
-            src={sticker}
+            src="/ganyu_upset.webp"
             loading="eager"
             alt="crashing out sticker"
           />
