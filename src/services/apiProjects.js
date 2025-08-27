@@ -7,7 +7,10 @@ import { supabase } from "./supabase";
 // `${supabaseBucketUrl}/${bucket}/${imageName}
 
 export async function getProjects() {
-  const { data: projects, error } = await supabase.from("projects").select("*");
+  const { data: projects, error } = await supabase
+    .from("projects")
+    .select("*")
+    .order("end_date", { ascending: false });
   if (error) {
     console.error("Error fetching projects:", error);
     return [];
@@ -124,7 +127,7 @@ export async function updateProject(id, updatedProject) {
   let imagePath;
   // Case 1: File, so need to upload new + delete old
   if (isFile(image)) {
-    const oldImagePath = getProjectImage(id);
+    const oldImagePath = await getProjectImage(id);
     imagePath = await uploadImage(image);
     if (!imagePath) {
       throw new Error("Failed to upload new image, aborting update");
@@ -151,10 +154,16 @@ export async function updateProject(id, updatedProject) {
 }
 
 export async function deleteProject(id) {
-  const { error } = await supabase.from("projects").delete().eq("id", id);
+  const { data, error } = await supabase
+    .from("projects")
+    .delete()
+    .eq("id", id)
+    .select()
+    .single();
 
   if (error) {
     console.error("Error deleting project:", error);
     throw new Error("Failed to delete project");
   }
+  await deleteImage(data.image);
 }

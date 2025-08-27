@@ -1,3 +1,4 @@
+import { format, parse } from "date-fns";
 import { supabaseBucketUrl } from "../services/supabase";
 
 /**
@@ -25,4 +26,9 @@ export function getImageUrl(imagePath) {
  */
 export function getImagePath(imageUrl) {
   return imageUrl.replace(`${supabaseBucketUrl}/`, "");
+}
+
+export function formatDateMonthYear(dateStr) {
+  const date = parse(dateStr, "yyyy-MM-dd", new Date());
+  return format(date, "MMM yyyy");
 }
