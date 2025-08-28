@@ -18,6 +18,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+import Project from "./pages/Project";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,21 +34,21 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
       <Toaster
         position="bottom-right"
-        gutter={0}
+        gutter={8}
         containerStyle={{ margin: "8px" }}
         toastOptions={{
           success: {
             duration: 3000,
           },
           error: {
-            duration: 5000,
+            duration: 4000,
           },
           style: {
             fontSize: "16px",
             maxWidth: "500px",
             padding: "16px 24px",
-            backgroundColor: "var(--color-grey-0)",
-            color: "var(--color-grey-700)",
+            backgroundColor: "#334155", // bg-slate-700
+            color: "#cbd5e1", // text-slate-300
           },
         }}
       />
@@ -62,6 +63,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/projects" element={<Projects />} />
+                <Route path="/project/:slug" element={<Project />} />
                 <Route
                   path="/i-want-to-break-this-website"
                   element={<BrokenPage />}

@@ -6,26 +6,21 @@ import {
   HiOutlineInformationCircle,
   HiOutlineUser,
 } from "react-icons/hi2";
-import { Link } from "react-router-dom";
 import { usePreferences } from "../contexts/PreferencesProvider";
 import { homePageWords } from "../data/homePageWords";
 import Anchor from "../ui/Anchor";
 import Button from "../ui/Button";
 import Divider from "../ui/Divider";
+import LinkCard from "../ui/LinkCard";
 import QACard from "../ui/QACard";
 import QAList from "../ui/QAList";
 import Section from "../ui/Section";
+import SectionHeader from "../ui/SectionHeader";
+import SectionList from "../ui/SectionList";
 import TypeWriterText from "../ui/TypeWriterText";
 import { fadeInFromBottom } from "../utils/animationVariants";
-import { getProjectImage } from "../services/apiProjects";
-import SectionHeader from "../ui/SectionHeader";
-import LinkCard from "../ui/LinkCard";
-import SectionList from "../ui/SectionList";
-
-const MotionLink = motion.create(Link);
 
 function Home() {
-  console.log(getProjectImage(1));
   const { reducedMotion, toggleReducedMotion } = usePreferences();
   return (
     <>
@@ -34,8 +29,7 @@ function Home() {
           {!reducedMotion ? (
             <TypeWriterText
               words={homePageWords}
-              loop={false}
-              delayHoldWord={2000}
+              delayHoldWord={3000}
               delayNextWord={750}
               delay={50}
               delayDelete={20}

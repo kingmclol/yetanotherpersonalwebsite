@@ -19,10 +19,11 @@ function Divider({
   animateOnce = false,
   spacing = "medium",
   noAnimate = false,
+  variants = fadeInFromBottom,
 }) {
   return (
     <motion.div
-      variants={fadeInFromBottom}
+      variants={variants}
       initial={!noAnimate ? "initial" : ""}
       whileInView={!noAnimate ? "animate" : ""}
       viewport={{

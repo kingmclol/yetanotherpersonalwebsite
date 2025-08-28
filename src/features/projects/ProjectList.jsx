@@ -1,14 +1,7 @@
 import LoadingAnimation from "../../ui/LoadingAnimation";
-import Modal from "../../ui/Modal";
 import Section from "../../ui/Section";
-import {
-  fadeIn,
-  fadeInFromBottom,
-  fadeInFromLeft,
-  noAnimation,
-} from "../../utils/animationVariants";
+import { fadeInFromLeft, noAnimation } from "../../utils/animationVariants";
 import ProjectCard from "./ProjectCard";
-import { motion } from "motion/react";
 function ProjectList({ projects }) {
   return (
     <div className="flex min-w-xl items-center justify-center">
@@ -32,16 +25,9 @@ function ProjectList({ projects }) {
         </Section>
       ) : (
         <Section variants={noAnimation} className="grid grid-cols-2 gap-4">
-          <Modal>
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </Modal>
-          {/* <ProjectCard project={projects[0]} />
-          <ProjectCard project={projects[0]} />
-          <ProjectCard project={projects[0]} />
-          <ProjectCard project={projects[0]} />
-          <ProjectCard project={projects[0]} /> */}
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </Section>
       )}
     </div>

@@ -31,6 +31,19 @@ export async function getProjectById(id) {
   return project;
 }
 
+export async function getProjectBySlug(slug) {
+  const { data: project, error } = await supabase
+    .from("projects")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+  if (error) {
+    console.error("Error fetching project by slug:", error);
+    return null;
+  }
+  return project;
+}
+
 export async function createProject(project) {
   const image = project.image; // Either url or file
 

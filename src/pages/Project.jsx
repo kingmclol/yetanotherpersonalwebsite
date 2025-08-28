@@ -1,6 +1,7 @@
+import ProjectFullView from "../features/projects/ProjectFullView";
+
 function Project() {
-  const { projectId };
-  return <div></div>;
+  return <ProjectFullView/>;
 }
 
 export default Project;

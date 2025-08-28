@@ -1,5 +1,12 @@
 export const homePageWords = [
-  "Hello World!",
-  "This website was made by",
-  "Freeman Wang",
+  "Hello!",
+  "Bonjour!",
+  "你好!",
+  "The rest is gpt",
+  "Hola!",
+  "Ciao!",
+  "こんにちは!",
+  "안녕하세요!",
+  "Привет!",
+  "Merhaba!",
 ];
