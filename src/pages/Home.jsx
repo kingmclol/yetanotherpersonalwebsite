@@ -110,7 +110,7 @@ function Home() {
                 Uh if it's a performance problem i'm probably cooked
               </span>{" "}
               You can contact me, I guess. But adding an issue on the{" "}
-              <Anchor href="">
+              <Anchor href="https://github.com/kingmclol/yetanotherpersonalwebsite">
                 github
                 <HiMiniArrowTopRightOnSquare />
               </Anchor>{" "}
