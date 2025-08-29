@@ -19,12 +19,19 @@ import { formatDateMonthYear } from "../../utils/helpers";
 import ProjectImage from "./ProjectImage";
 import { useProject } from "./useProject";
 import toast from "react-hot-toast";
+import AuthStatusTag from "../auth/AuthStatusTag";
+import ProjectDangerZone from "./ProjectDangerZone";
 function ProjectFullView() {
   const params = useParams();
   const slug = params.slug;
   const { project, isLoading } = useProject(slug);
   if (isLoading) return <LoadingAnimation />;
-
+  if (project === null)
+    return (
+      <p>
+        Come on now, this project doesn't exist. Stop manually navigating to pages.
+      </p>
+    );
   const {
     start_date: startDate,
     end_date: endDate,
@@ -115,50 +122,7 @@ function ProjectFullView() {
         {description}
       </Section>
       <Divider />
-      <Section className="flex flex-col items-center justify-center">
-        <SectionHeader>Danger Zone</SectionHeader>
-        <motion.p variants={fadeInFromBottom}>
-          You are currently authenticated|unauthenticated. (WIP so this doesn't
-          do anything rn)
-        </motion.p>
-        <motion.div variants={fadeInFromBottom} className="my-4 flex gap-4">
-          <Button onClick={() => toast.error("Did you read the thing bro")}>
-            Edit Project
-          </Button>
-          <Modal>
-            <Modal.Open
-              target="confirmDelete"
-              renderButton={(openFunc) => (
-                <Button
-                  onClick={openFunc}
-                  className="rounded-full bg-red-700 px-4 py-2 text-white"
-                >
-                  Delete Project
-                </Button>
-              )}
-            />
-
-            <Modal.Window
-              name="confirmDelete"
-              titleText="Are you sure you want to do this?"
-              renderChildren={(closeFunc) => (
-                <div>
-                  <p className="italic">I'm not that stupid, you know.</p>
-                  <div className="mt-12 flex h-full items-center justify-around text-xl font-semibold tracking-wide">
-                    <Button onClick={closeFunc}>No, I'm not</Button>
-                    <Button
-                      onClick={() => toast.error("Did you read the thing bro")}
-                      className="rounded-full bg-red-700 px-4 py-2 text-white"
-                    >
-                      Yep, I'm sure
-                    </Button>
-                  </div>
-                </div>
-              )}
-            ></Modal.Window>
-          </Modal>
-        </motion.div>
-      </Section>
+      <ProjectDangerZone project={project} />
     </>
   );
 }

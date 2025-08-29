@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import contacts from "../data/contacts";
+import AuthStatusTag from "../features/auth/AuthStatusTag";
+import LoginLogoutButton from "../features/auth/LoginLogoutButton";
 import ContactCard from "../ui/ContactCard";
 import Divider from "../ui/Divider";
 import LoadingAnimation from "../ui/LoadingAnimation";
@@ -25,7 +27,8 @@ function Contact() {
           </p>
           <LoadingAnimation />
           <p className="text-center">
-            By the way, this isn't loading anything. I'm just showing the animation
+            By the way, this isn't loading anything. I'm just showing the
+            animation
           </p>
 
           <Link
@@ -34,6 +37,10 @@ function Contact() {
           >
             Boring. I want to cause an error, because I can.
           </Link>
+          <p>
+            You are currently <AuthStatusTag />
+          </p>
+          <LoginLogoutButton />
         </Section>
       </Section>
     </>

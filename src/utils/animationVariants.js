@@ -1,3 +1,7 @@
+/**
+ * Variants store for motion
+ */
+
 export const fadeInFromBottom = {
   initial: {
     opacity: 0,

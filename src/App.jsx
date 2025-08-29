@@ -20,11 +20,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Project from "./pages/Project";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {},
-  },
-});
+const queryClient = new QueryClient();
 
 // TODO: Use a data router with createBrowserRouter so can use ScrollRestoration
 

@@ -2,15 +2,17 @@ import LoadingAnimation from "../../ui/LoadingAnimation";
 import Section from "../../ui/Section";
 import { fadeInFromLeft, noAnimation } from "../../utils/animationVariants";
 import ProjectCard from "./ProjectCard";
-function ProjectList({ projects }) {
+function ProjectList({ projects, isLoading }) {
   return (
     <div className="flex min-w-xl items-center justify-center">
-      {!projects ? (
+      {isLoading ? (
         <div>
           <LoadingAnimation />
         </div>
       ) : projects.length === 0 ? (
         <Section
+          key="nodata"
+          layout
           variants={fadeInFromLeft}
           className="flex w-xl flex-col items-center justify-center gap-8"
         >
@@ -24,7 +26,11 @@ function ProjectList({ projects }) {
           </h1>
         </Section>
       ) : (
-        <Section variants={noAnimation} className="grid grid-cols-2 gap-4">
+        <Section
+          key={projects.map((p) => `${p.id}:${p.updated_at}`).join(",")}
+          variants={noAnimation}
+          className="grid grid-cols-2 gap-4"
+        >
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}

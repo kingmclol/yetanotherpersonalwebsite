@@ -3,11 +3,11 @@ import { useProjects } from "../features/projects/useProjects";
 import PageTitle from "../ui/PageTitle";
 
 function Projects() {
-  const { projects } = useProjects();
+  const { projects, isLoading } = useProjects();
   return (
     <>
-      <PageTitle title="Projects (WIP)" subtitle="Basically school projects" />
-      <ProjectList projects={projects} />
+      <PageTitle title="Projects" subtitle="Basically school projects" />
+      <ProjectList projects={projects} isLoading={isLoading} />
     </>
   );
 }

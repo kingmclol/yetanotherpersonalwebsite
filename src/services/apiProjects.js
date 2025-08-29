@@ -38,7 +38,10 @@ export async function getProjectBySlug(slug) {
     .eq("slug", slug)
     .single();
   if (error) {
-    console.error("Error fetching project by slug:", error);
+    console.error(
+      "Error fetching project by slug, was it just deleted?",
+      error,
+    );
     return null;
   }
   return project;
@@ -90,23 +93,27 @@ async function uploadImage(imageFile) {
 }
 
 // Can prob move to helpers, and
-// update to not delete if more than one project uses it
+// update to not delete if more at least one project uses it
 /**
  * Deletes an image from Supabase storage.
  * @param {String} imagePath The path of the image to delete.
  * @returns {Promise<Boolean>} Whether the deletion was successful
  */
 async function deleteImage(imagePath) {
-  if (!imagePath) return false;
-
-  const [bucket, fileName] = imagePath.split("/");
-  const { error } = await supabase.storage.from(bucket).remove([fileName]);
-
-  if (error) {
-    console.error("Error deleting image:", error);
-    return false;
-  }
+  // Currently don't want to delete images since it's too annoying to put them back
   return true;
+
+
+  // if (!imagePath) return false;
+
+  // const [bucket, fileName] = imagePath.split("/");
+  // const { error } = await supabase.storage.from(bucket).remove([fileName]);
+
+  // if (error) {
+  //   console.error("Error deleting image:", error);
+  //   return false;
+  // }
+  // return true;
 }
 
 /**
@@ -137,35 +144,50 @@ export async function getProjectImage(id) {
 export async function updateProject(id, updatedProject) {
   const image = updatedProject.image; // Either path or file. Upload if file. Do nothing if path
 
-  let imagePath;
   // Case 1: File, so need to upload new + delete old
   if (isFile(image)) {
     const oldImagePath = await getProjectImage(id);
-    imagePath = await uploadImage(image);
+    const imagePath = await uploadImage(image);
     if (!imagePath) {
       throw new Error("Failed to upload new image, aborting update");
     }
+    const { data, error } = await supabase
+      .from("projects")
+      .update({ ...updatedProject, image: imagePath })
+      .eq("id", id)
+      .single();
 
+    if (error) {
+      console.error("Error updating project:", error);
+      throw new Error("Failed to update project");
+    }
+
+    // Delete old image only after everything confirmed
     await deleteImage(oldImagePath);
+
+    return data;
   }
-  // Case 2: image path, so it's pointing to an existing image; didn't update image
+  // Case 2: image path, so image is an existing imagePath; no need to change
   else {
-    imagePath = image;
-  }
+    const { data, error } = await supabase
+      .from("projects")
+      .update({ ...updatedProject })
+      .eq("id", id)
+      .single();
 
-  const { data, error } = await supabase
-    .from("projects")
-    .update({ ...updatedProject, image: imagePath })
-    .eq("id", id)
-    .single();
-
-  if (error) {
-    console.error("Error updating project:", error);
-    throw new Error("Failed to update project");
+    if (error) {
+      console.error("Error updating project:", error);
+      throw new Error("Failed to update project");
+    }
+    return data;
   }
-  return data;
 }
 
+/**
+ * Deletes a project from the database
+ * @param {Number} id The id of the project to delete
+ * @returns The deleted project data
+ */
 export async function deleteProject(id) {
   const { data, error } = await supabase
     .from("projects")
@@ -179,4 +201,5 @@ export async function deleteProject(id) {
     throw new Error("Failed to delete project");
   }
   await deleteImage(data.image);
+  return data;
 }
