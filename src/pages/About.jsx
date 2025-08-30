@@ -3,7 +3,7 @@ import PageTitle from "../ui/PageTitle";
 function About() {
   return (
     <>
-      <PageTitle title="About (WIP)" subtitle="Work in progress" />
+      <PageTitle title="About (WIP)" subtitle="idk why im leaving this for last" />
     </>
   );
 }

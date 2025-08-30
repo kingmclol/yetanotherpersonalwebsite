@@ -6,7 +6,11 @@ import { useLogin } from "./useLogin";
 
 function LoginForm({ onSuccess }) {
   const { login, isPending } = useLogin();
-  function formAction(formData) {
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    console.log("login");
+    const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     login(data, {
       onSuccess: onSuccess,
@@ -14,7 +18,7 @@ function LoginForm({ onSuccess }) {
   }
   return (
     <div className="mx-auto max-w-96">
-      <form className="space-y-6" action={formAction}>
+      <form className="space-y-6" onSubmit={handleSubmit}>
         <FormRow label="Email">
           <Input
             type="email"

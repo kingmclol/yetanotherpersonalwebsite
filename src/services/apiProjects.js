@@ -177,7 +177,7 @@ export async function updateProject(id, updatedProject) {
 
     if (error) {
       console.error("Error updating project:", error);
-      throw new Error("Failed to update project");
+      throw new Error(error.message || "Failed to update project");
     }
     return data;
   }

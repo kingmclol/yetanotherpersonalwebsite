@@ -19,5 +19,5 @@ body {
 @custom-variant light (&:where(.light, .light *));
 
 li {
-  @apply list-none
+  @apply list-none;
 }

@@ -1,8 +1,7 @@
 import { motion } from "motion/react";
 import { useUser } from "./useUser";
-import { fadeInFromBottom } from "../../utils/animationVariants";
 function AuthStatusTag() {
-  const { isPending, isAuthenticated } = useUser();
+  const { isAuthenticated } = useUser();
   // text-green-500, text-red-500
   const glowColor = isAuthenticated ? "#22c55e" : "#ef4444";
 

@@ -1,26 +1,23 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { format } from "date-fns";
 import { motion } from "motion/react";
 import { HiOutlineUsers } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import Divider from "../../ui/Divider";
 import { fadeInFromBottom } from "../../utils/animationVariants";
-import { formatDateMonthYear, getImageUrl } from "../../utils/helpers";
+import { getImageUrl } from "../../utils/helpers";
 
 const MotionLink = motion.create(Link);
 function ProjectCard({ project }) {
   const {
-    id,
     start_date: startDate,
     end_date: endDate,
     title,
     image: imagePath,
     team_size: teamSize,
     slug,
-    external_url: projectUrl,
     description,
     tagline,
-    tool_main: mainTool,
-    tool_others: otherTools,
   } = project;
   const queryClient = useQueryClient();
   return (
@@ -74,8 +71,8 @@ function ProjectCard({ project }) {
             <HiOutlineUsers /> {teamSize === 1 ? "solo" : teamSize}
           </div>
           <div>
-            {formatDateMonthYear(startDate)} &mdash;{" "}
-            {endDate ? formatDateMonthYear(endDate) : "now"}
+            {format(new Date(startDate), "MMM yyyy")} &mdash;{" "}
+            {endDate ? format(new Date(endDate), "MMM yyyy") : "now"}
           </div>
         </div>
       </MotionLink>

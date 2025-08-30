@@ -28,7 +28,23 @@ export function getImagePath(imageUrl) {
   return imageUrl.replace(`${supabaseBucketUrl}/`, "");
 }
 
-export function formatDateMonthYear(dateStr) {
-  const date = parse(dateStr, "yyyy-MM-dd", new Date());
-  return format(date, "MMM yyyy");
-}
+// FUCK TIMEZONES
+// /**
+//  * Formats a date string to "MMM yyyy".
+//  * @param {String} dateStr a string in the format "yyyy-MM-dd"
+//  * @returns {String} The formatted date string
+//  */
+// export function formatDateMonthYear(dateStr) {
+//   const date = parse(dateStr, "yyyy-MM-dd", new Date());
+//   return format(date, "MMM yyyy");
+// }
+
+// /**
+//  * Extracts the month and year from a date string. Screw timezones.
+//  * @param {String} dateStr a string in the format "yyyy-MM-dd"
+//  * @returns {Object} An object containing the month and year
+//  */
+// export function parseDate(dateStr) {
+//   const [year, month, day] = dateStr.split("-").map(Number);
+//   return { month, year, day };
+// }

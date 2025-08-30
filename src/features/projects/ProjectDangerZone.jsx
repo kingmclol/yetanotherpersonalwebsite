@@ -1,15 +1,14 @@
-import toast from "react-hot-toast";
-import { fadeInFromBottom } from "../../utils/animationVariants";
+import { motion } from "motion/react";
+import Button from "../../ui/Button";
+import Modal from "../../ui/Modal";
 import Section from "../../ui/Section";
 import SectionHeader from "../../ui/SectionHeader";
-import { motion } from "motion/react";
-import Modal from "../../ui/Modal";
-import Button from "../../ui/Button";
+import { fadeInFromBottom } from "../../utils/animationVariants";
 import AuthStatusTag from "../auth/AuthStatusTag";
 import LoginForm from "../auth/LoginForm";
 import { useUser } from "../auth/useUser";
 import { useDeleteProject } from "./useDeleteProject";
-function ProjectDangerZone({ project }) {
+function ProjectDangerZone({ project, onStartEditing }) {
   const { isAuthenticated } = useUser();
   const { isDeleting, deleteProject } = useDeleteProject();
   return (
@@ -19,9 +18,7 @@ function ProjectDangerZone({ project }) {
         You are currently <AuthStatusTag />
       </motion.div>
       <motion.div variants={fadeInFromBottom} className="my-4 flex gap-4">
-        <Button onClick={() => toast.error("Did you read the thing bro")}>
-          Edit Project
-        </Button>
+        <Button onClick={onStartEditing}>Edit Project</Button>
         <Modal>
           <Modal.Open
             target="confirmDelete"
@@ -44,7 +41,9 @@ function ProjectDangerZone({ project }) {
                   I'm not that dumb. Status: <AuthStatusTag />
                 </p>
                 <div className="mt-12 flex h-full items-center justify-around text-xl font-semibold tracking-wide">
-                  <Button onClick={closeFunc}>No, I'm not</Button>
+                  <Button onClick={closeFunc} disabled={isDeleting}>
+                    No, I'm not
+                  </Button>
                   <Modal.Open
                     target={"login"}
                     renderButton={(openFunc) => (
@@ -55,6 +54,7 @@ function ProjectDangerZone({ project }) {
                             : openFunc
                         }
                         className="rounded-full bg-red-700 px-4 py-2 text-white"
+                        disabled={isDeleting}
                       >
                         Yep, I'm sure
                       </Button>

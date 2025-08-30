@@ -59,8 +59,8 @@ function Home() {
         </motion.p>
       </Section>
       <Divider noAnimate />
-      <motion.div className="mb-[60vh] flex items-center justify-center gap-2">
-        <FaAnglesDown /> Scroll down for some Not very FAQ (to let the entry
+      <motion.div className="mb-[60vh] flex items-center justify-center gap-2 text-center">
+        <FaAnglesDown /> Scroll down for some Not very FAQ (and to let the
         animations trigger)
         <FaAnglesDown />
       </motion.div>

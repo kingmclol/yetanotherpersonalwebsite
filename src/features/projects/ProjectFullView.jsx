@@ -1,12 +1,9 @@
 import { motion } from "motion/react";
 import { HiMiniArrowTopRightOnSquare, HiOutlineUsers } from "react-icons/hi2";
-import { useParams } from "react-router-dom";
 import Button from "../../ui/Button";
 import Divider from "../../ui/Divider";
-import LoadingAnimation from "../../ui/LoadingAnimation";
 import Modal from "../../ui/Modal";
 import Section from "../../ui/Section";
-import SectionHeader from "../../ui/SectionHeader";
 import ToolTag from "../../ui/ToolTag";
 import {
   buttonVariants,
@@ -15,23 +12,10 @@ import {
   fadeInFromLeft,
   fadeInFromRight,
 } from "../../utils/animationVariants";
-import { formatDateMonthYear } from "../../utils/helpers";
-import ProjectImage from "./ProjectImage";
-import { useProject } from "./useProject";
-import toast from "react-hot-toast";
-import AuthStatusTag from "../auth/AuthStatusTag";
 import ProjectDangerZone from "./ProjectDangerZone";
-function ProjectFullView() {
-  const params = useParams();
-  const slug = params.slug;
-  const { project, isLoading } = useProject(slug);
-  if (isLoading) return <LoadingAnimation />;
-  if (project === null)
-    return (
-      <p>
-        Come on now, this project doesn't exist. Stop manually navigating to pages.
-      </p>
-    );
+import ProjectImage from "./ProjectImage";
+import { format } from "date-fns";
+function ProjectFullView({ project, onStartEditing }) {
   const {
     start_date: startDate,
     end_date: endDate,
@@ -43,6 +27,7 @@ function ProjectFullView() {
     tool_main: mainTool,
     tool_others: otherTools,
   } = project;
+
   return (
     <>
       <Modal>
@@ -100,8 +85,8 @@ function ProjectFullView() {
           variants={fadeInFromRight}
           className="text-lg font-semibold tracking-wide"
         >
-          {formatDateMonthYear(startDate)} &mdash;{" "}
-          {endDate ? formatDateMonthYear(endDate) : "now"}
+          {format(new Date(startDate), "MMM yyyy")} &mdash;{" "}
+          {endDate ? format(new Date(endDate), "MMM yyyy") : "now"}
         </motion.div>
       </Section>
       <Divider variants={fadeIn} spacing="small" />
@@ -122,7 +107,7 @@ function ProjectFullView() {
         {description}
       </Section>
       <Divider />
-      <ProjectDangerZone project={project} />
+      <ProjectDangerZone project={project} onStartEditing={onStartEditing} />
     </>
   );
 }
