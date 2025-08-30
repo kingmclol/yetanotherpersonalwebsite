@@ -17,3 +17,11 @@ I tried to find ways to fix this but it seemed like only two main options exist:
 After thinking about it for a bit, I realized what the hell it's not like I'll update it that much anyways, and the probability that someone is using this the moment I updated something was very low. And you just need to refresh/change pages to fix it. So what's even the point?
 
 I chose to use the second option because like i'm not going to bother. It's just a second of inconvenience.
+
+## Stuff to do
+- Delete image on project delete if no projects refer to the image
+- Add support for uploading own image in project editor
+- use createbrowserrouter so scroll to top on route change
+- pagination for projects (much much later)
+- sorting + filter projects
+- about page

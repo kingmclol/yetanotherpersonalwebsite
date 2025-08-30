@@ -90,14 +90,13 @@ function ProjectFullView({ project, onStartEditing }) {
         </motion.div>
       </Section>
       <Divider variants={fadeIn} spacing="small" />
-      <Section
-        staggerChildren={0.15}
-        className="flex flex-wrap items-center justify-center gap-2"
-      >
-        <ToolTag tool={mainTool} isMain />
-        {otherTools.map((tool) => (
-          <ToolTag key={tool} tool={tool} />
-        ))}
+      <Section staggerChildren={0.15}>
+        <ul className="flex flex-wrap items-center justify-center gap-2">
+          <ToolTag tool={mainTool} isMain />
+          {otherTools.map((tool) => (
+            <ToolTag key={tool} tool={tool} />
+          ))}
+        </ul>
       </Section>
       <Divider variants={fadeIn} spacing="small" />
       <Section

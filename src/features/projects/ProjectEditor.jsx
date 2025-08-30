@@ -267,14 +267,16 @@ function ProjectEditor({ project }) {
         </div>
       </div>
       <Divider noAnimate spacing="small" />
-      <div className="flex max-w-2xl flex-wrap items-center justify-center gap-2">
-        <input
-          id="tool_main"
-          placeholder="Main tool"
-          {...register("tool_main", { required: "A main tool is required" })}
-          className="rounded-full border-2 border-purple-900 bg-purple-600 px-2 py-0.5 text-sm font-semibold tracking-wider text-white uppercase"
-          disabled={isWorking}
-        />
+      <ul className="flex max-w-2xl flex-wrap items-center justify-center gap-2">
+        <li>
+          <input
+            id="tool_main"
+            placeholder="Main tool"
+            {...register("tool_main", { required: "A main tool is required" })}
+            className="rounded-full border-2 border-purple-900 bg-purple-600 px-2 py-0.5 text-sm font-semibold tracking-wider text-white uppercase"
+            disabled={isWorking}
+          />
+        </li>
         <ToolListEditing
           mainTool={getValues().tool_main.toLowerCase()}
           otherTools={otherTools}
@@ -286,7 +288,7 @@ function ProjectEditor({ project }) {
           }}
           disabled={isWorking}
         />
-      </div>
+      </ul>
       <Divider noAnimate spacing="small" />
       <div className="flex items-center justify-center">
         <textarea

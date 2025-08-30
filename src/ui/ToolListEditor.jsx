@@ -27,7 +27,7 @@ function ToolListEditor({
   return (
     <>
       {otherTools.map((tool, idx) => (
-        <div
+        <li
           key={idx}
           className="flex items-center justify-between gap-2 rounded-full border-2 border-slate-700 bg-slate-600 px-2 py-0.5 text-sm font-semibold tracking-wider text-slate-100 uppercase"
         >
@@ -39,9 +39,9 @@ function ToolListEditor({
           >
             <HiXMark className="h-4 w-4 text-red-700" strokeWidth={2} />
           </button>
-        </div>
+        </li>
       ))}
-      <div className="flex gap-2">
+      <li className="flex gap-2">
         <input
           className="flex w-32 items-center justify-between gap-1 rounded-full border-2 border-slate-700 bg-slate-600 px-2 py-0.5 text-sm font-semibold tracking-wider text-slate-100 uppercase"
           placeholder="Add tag..."
@@ -58,7 +58,7 @@ function ToolListEditor({
         >
           <HiPlus className="h-4 w-4" strokeWidth={2} />
         </button>
-      </div>
+      </li>
     </>
   );
 }
