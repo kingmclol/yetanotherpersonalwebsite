@@ -19,6 +19,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Project from "./pages/Project";
+import ProjectEditor from "./features/projects/ProjectEditor";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,10 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/project/:slug" element={<Project />} />
+                <Route
+                  path="/project/new"
+                  element={<ProjectEditor project={null} />}
+                />
                 <Route
                   path="/i-want-to-break-this-website"
                   element={<BrokenPage />}

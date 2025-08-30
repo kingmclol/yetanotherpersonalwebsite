@@ -1,4 +1,4 @@
-import { format, isBefore } from "date-fns";
+import { isAfter, isBefore, isSameMonth } from "date-fns";
 import { motion } from "motion/react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -7,6 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import {
   HiArrowTopRightOnSquare,
+  HiOutlineDocument,
   HiOutlineFingerPrint,
   HiOutlineUsers,
 } from "react-icons/hi2";
@@ -15,12 +16,14 @@ import Button from "../../ui/Button";
 import Divider from "../../ui/Divider";
 import Modal from "../../ui/Modal";
 import ToolListEditing from "../../ui/ToolListEditor";
+import { buttonVariants } from "../../utils/animationVariants";
 import AuthStatusTag from "../auth/AuthStatusTag";
 import LoginForm from "../auth/LoginForm";
 import { useUser } from "../auth/useUser";
 import ProjectImage from "./ProjectImage";
+import { useAddProject } from "./useAddProject";
 import { useUpdateProject } from "./useUpdateProject";
-import { buttonVariants } from "../../utils/animationVariants";
+import { isSameMonthOrBefore } from "../../utils/helpers";
 // This shit is the worst thing I've ever made in this website what the fuck
 // I have no fucking clue how to manage everything since things are not standard forms + layout hell
 // Why the hell did i decide to make the form accessible to non auth users
@@ -39,29 +42,29 @@ import { buttonVariants } from "../../utils/animationVariants";
 // For auth users, save button works as normal submit
 
 function ProjectEditor({ project }) {
-  const id = project.id;
+  const id = project?.id || null;
   const formFields = {
     title: project?.title || "",
     external_url: project?.external_url || "",
     team_size: project?.team_size || null,
     start_date: project?.start_date ? new Date(project.start_date) : new Date(),
     end_date: project?.end_date ? new Date(project.end_date) : null,
-    image: project?.image || null,
+    image: project?.image || "",
     tool_main: project?.tool_main || "",
     description: project?.description || "",
     slug: project?.slug || "",
+    tagline: project?.tagline || "",
   };
 
-  const [otherTools, setOtherTools] = useState(project.tool_others);
+  const [otherTools, setOtherTools] = useState(project?.tool_others || []);
   const { isAuthenticated } = useUser();
   const { updateProject, isUpdating } = useUpdateProject();
+  const { addProject, isAdding } = useAddProject();
+  const isWorking = isUpdating || isAdding;
   const navigate = useNavigate();
-  const { register, handleSubmit, getValues, control, trigger, formState } =
-    useForm({
-      defaultValues: formFields,
-    });
-  const imagePath = project.image;
-  const title = project.title;
+  const { register, handleSubmit, getValues, control } = useForm({
+    defaultValues: formFields,
+  });
 
   function onSubmit(formData) {
     if (!isAuthenticated) return; // I don't know how much guards i need to add to be safe lol
@@ -78,7 +81,12 @@ function ProjectEditor({ project }) {
       end_date,
       tool_others: otherTools,
     };
-    updateProject({ id, updatedProject });
+    if (id === null) {
+      // id only null if this is a new project
+      addProject(updatedProject);
+    } else {
+      updateProject({ id, updatedProject });
+    }
   }
   function onError(errors) {
     Object.values(errors).forEach((err) => {
@@ -100,7 +108,10 @@ function ProjectEditor({ project }) {
               className="mx-auto mb-6 aspect-[16/9] max-w-xl rounded-lg border-4 border-slate-600 hover:border-slate-400"
               onClick={openFunc}
             >
-              <ProjectImage imagePath={imagePath} alt={title} />
+              <ProjectImage
+                imagePath={getValues().image}
+                alt={getValues().title}
+              />
             </motion.div>
           )}
         />
@@ -108,7 +119,10 @@ function ProjectEditor({ project }) {
           name="image"
           renderChildren={(closeFunc) => (
             <div className="flex flex-col items-center justify-center gap-4">
-              <ProjectImage imagePath={imagePath} alt={title} />
+              <ProjectImage
+                imagePath={getValues().image}
+                alt={getValues().title}
+              />
               <Button onClick={closeFunc}>Close</Button>
             </div>
           )}
@@ -122,6 +136,7 @@ function ProjectEditor({ project }) {
             placeholder="Project Title"
             className="w-full max-w-96 rounded-full bg-slate-600 text-center"
             {...register("title", { required: "Project title required" })}
+            disabled={isWorking}
           />
         </h2>
         <div className="flex items-center gap-4">
@@ -141,6 +156,7 @@ function ProjectEditor({ project }) {
               },
             })}
             placeholder="slug (identifier)"
+            disabled={isWorking}
           />
         </div>
         <div className="flex items-center gap-4">
@@ -151,6 +167,18 @@ function ProjectEditor({ project }) {
             placeholder="external url"
             className="w-full rounded-full bg-slate-700 px-4 py-1"
             {...register("external_url")}
+            disabled={isWorking}
+          />
+        </div>
+        <div className="flex items-center gap-4">
+          <HiOutlineDocument className="h-6 w-6" />
+          <input
+            type="text"
+            id="tagline"
+            placeholder="a short tagline"
+            className="w-full rounded-full bg-slate-700 px-4 py-1"
+            {...register("tagline")}
+            disabled={isWorking}
           />
         </div>
       </div>
@@ -166,18 +194,33 @@ function ProjectEditor({ project }) {
               required: "Team size required",
               valueAsNumber: "Uh you need a number",
               validate: (value) =>
+                // Techically browser should come in clutch so not really needed
                 Number.isInteger(value) || "an INTEGER please",
               min: {
                 value: 1,
                 message: "ffs bro",
               },
+              max: {
+                value: 100,
+                message: "zero chance you counted above 100",
+              },
             })}
+            disabled={isWorking}
           />
         </div>
         <div className="flex gap-2 font-semibold tracking-wide">
           <Controller
             control={control}
-            rules={{ required: "A start date is required" }}
+            rules={{
+              required: "A start date is required",
+              validate: (value) => {
+                // prevent future start dates
+                return (
+                  isSameMonthOrBefore(value, new Date()) ||
+                  "Don't get ahead of yourself (start date in future)"
+                );
+              },
+            }}
             name="start_date"
             render={({ field }) => (
               <DatePicker
@@ -189,6 +232,7 @@ function ProjectEditor({ project }) {
                 showMonthYearPicker
                 className="max-w-32 rounded-full bg-slate-700 px-2 py-1 text-center"
                 placeholderText="Start date"
+                disabled={isWorking}
               />
             )}
           />
@@ -198,11 +242,12 @@ function ProjectEditor({ project }) {
             name="end_date"
             rules={{
               validate: (value) => {
-                return (
-                  !value ||
-                  isBefore(getValues().start_date, value) ||
-                  "End date needs to be after start date"
-                );
+                const today = new Date();
+                if (!value) return true; // valid no matter what
+                if (!isSameMonthOrBefore(getValues().start_date, value))
+                  return "Can you stop testing form validations?";
+                if (isAfter(value, today) && !isSameMonth(value, today))
+                  return "End date cannot be predetermined. Clear field for ongoing.";
               },
             }}
             render={({ field }) => (
@@ -215,6 +260,7 @@ function ProjectEditor({ project }) {
                 showMonthYearPicker
                 className="max-w-32 rounded-full bg-slate-700 px-2 py-1 text-center"
                 placeholderText="now"
+                disabled={isWorking}
               />
             )}
           />
@@ -227,9 +273,10 @@ function ProjectEditor({ project }) {
           placeholder="Main tool"
           {...register("tool_main", { required: "A main tool is required" })}
           className="rounded-full border-2 border-purple-900 bg-purple-600 px-2 py-0.5 text-sm font-semibold tracking-wider text-white uppercase"
+          disabled={isWorking}
         />
         <ToolListEditing
-          mainTool={getValues().mainTool}
+          mainTool={getValues().tool_main.toLowerCase()}
           otherTools={otherTools}
           addTool={(tool) =>
             setOtherTools((prev) => [...prev, tool.toLowerCase()])
@@ -237,6 +284,7 @@ function ProjectEditor({ project }) {
           removeTool={(index) => {
             setOtherTools((prev) => prev.filter((_, idx) => idx !== index));
           }}
+          disabled={isWorking}
         />
       </div>
       <Divider noAnimate spacing="small" />
@@ -246,6 +294,7 @@ function ProjectEditor({ project }) {
           placeholder="Project description"
           className="field-sizing-content min-h-96 w-full max-w-2xl rounded-xl bg-slate-700 px-4 py-2 whitespace-pre-wrap"
           {...register("description")}
+          disabled={isWorking}
         />
       </div>
       <Divider noAnimate />
@@ -254,7 +303,11 @@ function ProjectEditor({ project }) {
           You are currently <AuthStatusTag />
         </div>
         <div className="my-4 flex gap-4">
-          <Button type="button" onClick={() => navigate(-1)}>
+          <Button
+            type="button"
+            onClick={() => navigate(-1)}
+            disabled={isWorking}
+          >
             Cancel
           </Button>
           <Modal>
@@ -262,16 +315,17 @@ function ProjectEditor({ project }) {
               target="login"
               renderButton={(openFunc) => (
                 <Button
+                  disabled={isWorking}
                   type={isAuthenticated ? "submit" : "button"}
                   onClick={
                     isAuthenticated
-                      ? () => {} // no extra function for auth users
-                      : async () => {
-                          // Force check for validity, and show errors/login form for unauth users
-                          const valid = await trigger();
-                          if (valid) openFunc();
-                          else onError(formState.errors);
-                        }
+                      ? undefined
+                      : handleSubmit(
+                          // if form valid open login modal
+                          () => openFunc(),
+                          // if form errored toast errors
+                          onError,
+                        )
                   }
                   className="rounded-full bg-red-700 px-4 py-2 text-white"
                 >

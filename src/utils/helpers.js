@@ -1,4 +1,4 @@
-import { format, parse } from "date-fns";
+import { format, isAfter, isBefore, isSameMonth, parse } from "date-fns";
 import { supabaseBucketUrl } from "../services/supabase";
 
 /**
@@ -27,7 +27,25 @@ export function getImageUrl(imagePath) {
 export function getImagePath(imageUrl) {
   return imageUrl.replace(`${supabaseBucketUrl}/`, "");
 }
+/**
+ * Checks if the given date is in the same month or before the date to compare.
+ * @param {Date} date The date to check.
+ * @param {Date} dateToCompare The date to compare against.
+ * @returns {boolean} True if the date is in the same month or before the date to compare, false otherwise.
+ */
+export function isSameMonthOrBefore(date, dateToCompare) {
+  return isBefore(date, dateToCompare) || isSameMonth(date, dateToCompare);
+}
 
+/**
+ * Checks if the given date is in the same month or after the date to compare.
+ * @param {Date} date The date to check.
+ * @param {Date} dateToCompare The date to compare against.
+ * @returns {boolean} True if the date is in the same month or after the date to compare, false otherwise.
+ */
+export function isSameMonthOrAfter(date, dateToCompare) {
+  return isAfter(date, dateToCompare) || isSameMonth(date, dateToCompare);
+}
 // FUCK TIMEZONES
 // /**
 //  * Formats a date string to "MMM yyyy".

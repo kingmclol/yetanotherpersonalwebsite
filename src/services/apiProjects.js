@@ -1,3 +1,4 @@
+import { el } from "date-fns/locale";
 import { isFile } from "../utils/helpers";
 import { supabase } from "./supabase";
 
@@ -48,18 +49,21 @@ export async function getProjectBySlug(slug) {
 }
 
 export async function createProject(project) {
-  const image = project.image; // Either url or file
+  const image = project.image; // Either url or file, or "" for no set image
 
   // If the image is a file, upload it, otherwise keep it unchanged.
   const imagePath = isFile(image) ? await uploadImage(image) : image;
 
-  if (!imagePath) {
+  if (imagePath === null) {
     throw new Error("Project image upload failed");
+  } else if (imagePath === "") {
+    console.log('Image is "". No image uploaded');
   }
 
   const { data, error } = await supabase
     .from("projects")
     .insert([{ ...project, image: imagePath }])
+    .select()
     .single();
   if (error) {
     console.error("Error creating project:", error);
@@ -102,7 +106,6 @@ async function uploadImage(imageFile) {
 async function deleteImage(imagePath) {
   // Currently don't want to delete images since it's too annoying to put them back
   return true;
-
 
   // if (!imagePath) return false;
 

@@ -2,6 +2,7 @@ import LoadingAnimation from "../../ui/LoadingAnimation";
 import Section from "../../ui/Section";
 import { fadeInFromLeft, noAnimation } from "../../utils/animationVariants";
 import ProjectCard from "./ProjectCard";
+import ProjectCardEmpty from "./ProjectCardEmpty";
 function ProjectList({ projects, isLoading }) {
   return (
     <div className="flex min-w-xl items-center justify-center">
@@ -34,6 +35,7 @@ function ProjectList({ projects, isLoading }) {
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
+          <ProjectCardEmpty />
         </Section>
       )}
     </div>
