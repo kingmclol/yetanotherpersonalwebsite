@@ -43,7 +43,7 @@ function ProjectFullView({ project, onStartEditing }) {
               className="mx-auto mb-6 aspect-[16/9] max-w-xl rounded-lg border-4 border-slate-600 hover:border-slate-400"
               onClick={openFunc}
             >
-              <ProjectImage imagePath={imagePath} alt={title} />
+              <ProjectImage image={imagePath} alt={title} />
             </motion.div>
           )}
         />
@@ -51,7 +51,7 @@ function ProjectFullView({ project, onStartEditing }) {
           name="image"
           renderChildren={(closeFunc) => (
             <div className="flex flex-col items-center justify-center gap-4">
-              <ProjectImage imagePath={imagePath} alt={title} />
+              <ProjectImage image={imagePath} alt={title} />
               <Button onClick={closeFunc}>Close</Button>
             </div>
           )}

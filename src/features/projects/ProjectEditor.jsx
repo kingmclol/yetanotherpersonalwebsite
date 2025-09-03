@@ -1,4 +1,4 @@
-import { isAfter, isBefore, isSameMonth } from "date-fns";
+import { isAfter, isSameMonth } from "date-fns";
 import { motion } from "motion/react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -17,13 +17,13 @@ import Divider from "../../ui/Divider";
 import Modal from "../../ui/Modal";
 import ToolListEditing from "../../ui/ToolListEditor";
 import { buttonVariants } from "../../utils/animationVariants";
+import { isSameMonthOrBefore } from "../../utils/helpers";
 import AuthStatusTag from "../auth/AuthStatusTag";
 import LoginForm from "../auth/LoginForm";
 import { useUser } from "../auth/useUser";
 import ProjectImage from "./ProjectImage";
 import { useAddProject } from "./useAddProject";
 import { useUpdateProject } from "./useUpdateProject";
-import { isSameMonthOrBefore } from "../../utils/helpers";
 // This shit is the worst thing I've ever made in this website what the fuck
 // I have no fucking clue how to manage everything since things are not standard forms + layout hell
 // Why the hell did i decide to make the form accessible to non auth users
@@ -41,6 +41,8 @@ import { isSameMonthOrBefore } from "../../utils/helpers";
 // Anyways, for unauth users: no access to submit, use form normally until it is valid. When it is valid, open login form
 // For auth users, save button works as normal submit
 
+const imageInputId = "image-input";
+
 function ProjectEditor({ project }) {
   const id = project?.id || null;
   const formFields = {
@@ -49,7 +51,7 @@ function ProjectEditor({ project }) {
     team_size: project?.team_size || null,
     start_date: project?.start_date ? new Date(project.start_date) : new Date(),
     end_date: project?.end_date ? new Date(project.end_date) : null,
-    image: project?.image || "",
+    // image: project?.image || "",
     tool_main: project?.tool_main || "",
     description: project?.description || "",
     slug: project?.slug || "",
@@ -57,6 +59,7 @@ function ProjectEditor({ project }) {
   };
 
   const [otherTools, setOtherTools] = useState(project?.tool_others || []);
+  const [image, setImage] = useState(project?.image || "");
   const { isAuthenticated } = useUser();
   const { updateProject, isUpdating } = useUpdateProject();
   const { addProject, isAdding } = useAddProject();
@@ -65,7 +68,6 @@ function ProjectEditor({ project }) {
   const { register, handleSubmit, getValues, control } = useForm({
     defaultValues: formFields,
   });
-
   function onSubmit(formData) {
     if (!isAuthenticated) return; // I don't know how much guards i need to add to be safe lol
     const tool_main = formData.tool_main.toLowerCase();
@@ -80,6 +82,7 @@ function ProjectEditor({ project }) {
       start_date,
       end_date,
       tool_others: otherTools,
+      image,
     };
     if (id === null) {
       // id only null if this is a new project
@@ -97,6 +100,15 @@ function ProjectEditor({ project }) {
     <form onSubmit={handleSubmit(onSubmit, onError)} className="min-w-xl">
       {/* Eat the enter key triggering topmost button */}
       <button disabled className="hidden" aria-hidden="true"></button>
+      <input
+        hidden
+        type="file"
+        accept=".png,.jpg,.webp,.jpeg"
+        id={imageInputId}
+        onChange={(e) => {
+          setImage(e.target.files?.[0] || "");
+        }}
+      />
       <Modal>
         <Modal.Open
           target="image"
@@ -108,10 +120,7 @@ function ProjectEditor({ project }) {
               className="mx-auto mb-6 aspect-[16/9] max-w-xl rounded-lg border-4 border-slate-600 hover:border-slate-400"
               onClick={openFunc}
             >
-              <ProjectImage
-                imagePath={getValues().image}
-                alt={getValues().title}
-              />
+              <ProjectImage image={image} alt={getValues().title} />
             </motion.div>
           )}
         />
@@ -119,10 +128,14 @@ function ProjectEditor({ project }) {
           name="image"
           renderChildren={(closeFunc) => (
             <div className="flex flex-col items-center justify-center gap-4">
-              <ProjectImage
-                imagePath={getValues().image}
-                alt={getValues().title}
-              />
+              <motion.label
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.98 }}
+                htmlFor={imageInputId}
+                className="cursor-pointer"
+              >
+                <ProjectImage image={image} alt={getValues().title} />
+              </motion.label>
               <Button onClick={closeFunc}>Close</Button>
             </div>
           )}

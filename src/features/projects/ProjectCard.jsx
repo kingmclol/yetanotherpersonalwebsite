@@ -34,7 +34,7 @@ function ProjectCard({ project }) {
       className="flex min-h-96 cursor-pointer flex-col rounded-xl border-4 border-slate-600 bg-slate-700 transition-colors hover:border-slate-400"
     >
       <div className="aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-800">
-        <ProjectImage alt={title} imagePath={imagePath} />
+        <ProjectImage alt={title} image={imagePath} />
       </div>
       <div className="flex flex-1 flex-col justify-between px-4 py-4">
         <div>

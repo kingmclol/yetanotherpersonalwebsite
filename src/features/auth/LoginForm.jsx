@@ -9,7 +9,6 @@ function LoginForm({ onSuccess }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("login");
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     login(data, {
