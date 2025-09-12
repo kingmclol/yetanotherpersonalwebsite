@@ -1,13 +1,22 @@
-import { useRef } from "react";
-import { Outlet } from "react-router-dom";
+import { useLayoutEffect, useRef } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { usePreferences } from "../contexts/PreferencesProvider";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import ScrollProgress from "./ScrollProgress";
-import { usePreferences } from "../contexts/PreferencesProvider";
 
 function AppLayout() {
   const containerRef = useRef(null);
   const { reducedMotion } = usePreferences();
+  const location = useLocation();
+
+  useLayoutEffect(() => {
+    // On location (route) change, scroll the main content container to top
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ top: 0 });
+    }
+  }, [location]);
+
   return (
     <div className="grid h-screen grid-rows-[auto_1fr]">
       <Navbar />

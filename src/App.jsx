@@ -23,8 +23,6 @@ import ProjectEditor from "./features/projects/ProjectEditor";
 
 const queryClient = new QueryClient();
 
-// TODO: Use a data router with createBrowserRouter so can use ScrollRestoration
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>

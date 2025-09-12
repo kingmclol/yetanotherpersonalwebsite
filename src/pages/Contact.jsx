@@ -9,7 +9,9 @@ import PageTitle from "../ui/PageTitle";
 import Section from "../ui/Section";
 import SectionHeader from "../ui/SectionHeader";
 import SectionList from "../ui/SectionList";
+import { usePreferences } from "../contexts/PreferencesProvider";
 function Contact() {
+  const { reducedMotion } = usePreferences();
   return (
     <>
       <PageTitle title="Contacts" subtitle="Plus extra stuff not in footer" />
@@ -27,8 +29,10 @@ function Contact() {
           </p>
           <LoadingAnimation />
           <p className="text-center">
-            By the way, this isn't loading anything. I'm just showing the
-            animation
+            By the way, this isn't loading anything.{" "}
+            {reducedMotion
+              ? "You have motion off so it's not really fun to watch."
+              : "I'm just showing the cool animation."}
           </p>
 
           <Link
