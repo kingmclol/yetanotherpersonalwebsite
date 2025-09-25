@@ -23,9 +23,9 @@ function AppLayout() {
       <main
         ref={containerRef}
         tabIndex={-1}
-        className="flex flex-col items-center overflow-auto px-8 pt-8 pb-2"
+        className="flex flex-col items-center overflow-auto pt-8 pb-2 md:px-8"
       >
-        <div className="max-w-4xl min-w-xl flex-1">
+        <div className="w-full flex-1 sm:w-xl md:w-2xl lg:w-4xl">
           {!reducedMotion && <ScrollProgress containerRef={containerRef} />}
           <Outlet context={{ containerRef }} />
         </div>

@@ -16,7 +16,7 @@ function Project() {
   if (isLoading) return <LoadingAnimation />;
   if (project === null) {
     return (
-      <p>
+      <p className="text-center">
         Come on now, this project doesn't exist. Stop manually navigating to
         pages.
       </p>

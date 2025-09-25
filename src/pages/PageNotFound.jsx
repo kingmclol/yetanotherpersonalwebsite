@@ -1,10 +1,10 @@
 function PageNotFound() {
   return (
     <div>
-      <h1>
+      <p className="text-center">
         Page not found. Kinda cruel of you to try and bully my work this much if
         you intended to do this.
-      </h1>
+      </p>
     </div>
   );
 }

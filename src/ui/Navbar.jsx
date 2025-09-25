@@ -33,6 +33,10 @@ const links = [
     label: "Contact",
     to: "/contact",
   },
+  {
+    label: "Blog",
+    to: "/blog",
+  },
 ];
 
 function getNavLinkClass({ isActive }) {

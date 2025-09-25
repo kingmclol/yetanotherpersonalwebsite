@@ -20,6 +20,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Project from "./pages/Project";
 import ProjectEditor from "./features/projects/ProjectEditor";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +69,8 @@ function App() {
                   path="/i-want-to-break-this-website"
                   element={<BrokenPage />}
                 />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
               </Route>
             </Routes>
           </ErrorBoundary>
