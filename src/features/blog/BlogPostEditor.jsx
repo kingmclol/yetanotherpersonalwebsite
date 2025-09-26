@@ -15,6 +15,7 @@ import { useUser } from "../auth/useUser";
 import Button from "../../ui/Button";
 
 function BlogPostEditor({ post }) {
+  console.log(post)
   const id = post?.id || null; // null if creating new post
   const formFields = {
     title: post?.title || "",

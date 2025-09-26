@@ -26,10 +26,16 @@ function BlogHeader({ post }) {
         <div className="flex justify-between gap-12 px-4 text-slate-400">
           <Section>
             <motion.p variants={fadeInFromLeft}>
-              Posted: {format(new Date(datePosted), "yyyy-MM-dd hh:mm")}
+              Posted:{" "}
+              {datePosted
+                ? format(new Date(datePosted), "yyyy-MM-dd hh:mm")
+                : "Never"}
             </motion.p>
             <motion.p variants={fadeInFromLeft}>
-              Updated: {format(new Date(dateUpdated), "yyyy-MM-dd hh:mm")}
+              Updated:{" "}
+              {dateUpdated
+                ? format(new Date(dateUpdated), "yyyy-MM-dd hh:mm")
+                : "Never"}
             </motion.p>
           </Section>
           <Section className="flex flex-col items-start">

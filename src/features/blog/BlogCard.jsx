@@ -64,9 +64,11 @@ function BlogCard({ post }) {
             </>
           )}
         </div>
-        <div className="flex items-center justify-center gap-2 uppercase">
+        <div className="flex items-center justify-center gap-2">
           <HiCalendarDays />
-          {format(new Date(datePosted), "yyyy-MM-dd")}
+          {datePosted
+            ? format(new Date(datePosted), "yyyy-MM-dd")
+            : "Not posted"}
         </div>
       </div>
     </MotionLink>
