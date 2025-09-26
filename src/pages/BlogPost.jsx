@@ -1,46 +1,38 @@
-import { useEffect, useState } from "react";
-import Markdown from "react-markdown";
-import Button from "../ui/Button";
-import BlogHeader from "../features/blog/BlogHeader";
-import { usePost } from "../features/blog/usePost";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
+import BlogPostEditor from "../features/blog/BlogPostEditor";
+import BlogPostViewer from "../features/blog/BlogPostViewer";
+import { usePost } from "../features/blog/usePost";
 import LoadingAnimation from "../ui/LoadingAnimation";
 function BlogPost() {
   const { id } = useParams();
 
   const { post, isLoading } = usePost(id);
-
-  const [tempText, setTempText] = useState("");
-  const [editing, setIsEditing] = useState(false);
-
-  useEffect(() => {
-    if (!post?.content) return;
-    setTempText(post.content);
-  }, [post?.content]);
+  const [isEditing, setIsEditing] = useState(false);
 
   if (isLoading) return <LoadingAnimation />;
-  if (!post) return <p className="text-center">No post found..?</p>;
-  
+
+  if (!post)
+    return (
+      <p className="text-center">
+        No post found... If you're just playing around, thanks for the interest.
+        But come on. These are incremental numeric ids.
+      </p>
+    );
+
   return (
-    <article>
-      <BlogHeader post={post} />
-      <div className="w-full max-w-4xl flex-1 rounded-md bg-slate-800 p-12">
-        <Button onClick={() => setIsEditing((prev) => !prev)}>
-          {editing ? "save" : "edit"}
-        </Button>
-        {editing ? (
-          <textarea
-            className="h-48 w-full"
-            value={tempText}
-            onChange={(e) => setTempText(e.target.value)}
-          />
+    <>
+      <article>
+        {isEditing ? (
+          <BlogPostEditor post={post} />
         ) : (
-          <div className="prose-slate prose prose-invert w-full">
-            <Markdown>{tempText}</Markdown>
-          </div>
+          <BlogPostViewer
+            post={post}
+            onStartEditing={() => setIsEditing(true)}
+          />
         )}
-      </div>
-    </article>
+      </article>
+    </>
   );
 }
 

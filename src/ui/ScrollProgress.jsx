@@ -22,7 +22,7 @@ function ScrollProgress({ containerRef }) {
 
   return (
     <motion.div
-      className="fixed right-0 bottom-0 left-0 h-1.5 bg-fuchsia-400"
+      className="fixed right-0 bottom-0 left-0 z-10 h-1.5 bg-fuchsia-400"
       style={{
         scaleX,
         originX: 0,

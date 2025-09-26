@@ -6,11 +6,24 @@ import { Link } from "react-router-dom";
 import { fadeInFromBottom } from "../../utils/animationVariants";
 import { useQueryClient } from "@tanstack/react-query";
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
+
+function getColors(published) {
+  return published
+    ? "border-slate-600 hover:border-slate-400 bg-slate-700"
+    : "bg-slate-800 border-slate-700 hover:border-slate-600 text-slate-500";
+}
 
 function BlogCard({ post }) {
   const queryClient = useQueryClient();
-  const { title, locked, created_at: datePosted, subtitle, id } = post;
+  const {
+    title,
+    locked,
+    published_at: datePosted,
+    subtitle,
+    id,
+    published,
+  } = post;
   return (
     <MotionLink
       to={`/blog/${id}`}
@@ -22,13 +35,17 @@ function BlogCard({ post }) {
       whileTap={{
         scale: 0.96,
       }}
-      className="flex cursor-pointer rounded-xl border-4 border-slate-600 bg-slate-700 px-4 py-2 transition-colors hover:border-slate-400"
+      className={`flex cursor-pointer rounded-xl border-4 px-4 py-2 transition-colors ${getColors(published)}`}
     >
       <div className="flex-1">
-        <h2 className="mb-2 border-b-2 border-b-slate-500 text-2xl font-semibold tracking-wide text-slate-200">
+        <h2
+          className={`mb-2 border-b-2 border-b-slate-500 text-2xl font-semibold tracking-wide text-slate-${published ? "200" : "400"}`}
+        >
           {title}
         </h2>
-        <p className="text-slate-300 italic">{subtitle}</p>
+        <p className={`text-slate-${published ? "300" : "400"} italic`}>
+          {subtitle}
+        </p>
       </div>
       <div className="flex flex-col items-start justify-around border-l-2 border-l-slate-500 pl-4 font-semibold tracking-wide">
         <div className="flex items-center justify-center gap-2">

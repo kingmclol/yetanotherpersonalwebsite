@@ -8,22 +8,22 @@ import { fadeInFromLeft, fadeInFromRight } from "../../utils/animationVariants";
 function BlogHeader({ post }) {
   const {
     title,
-    created_at: datePosted,
+    published_at: datePosted,
     updated_at: dateUpdated,
     locked,
   } = post;
   return (
     <>
       <Divider spacing="small" />
-      <Section>
+      <Section className="mx-auto flex w-4/5 flex-col items-stretch">
         <motion.h1
           variants={fadeInFromLeft}
-          className="mb-2 text-center text-4xl font-bold tracking-wide"
+          className="mb-2 text-center text-3xl font-bold tracking-wide"
         >
           {title}
         </motion.h1>
 
-        <div className="flex justify-around gap-12 text-slate-400">
+        <div className="flex justify-between gap-12 px-4 text-slate-400">
           <Section>
             <motion.p variants={fadeInFromLeft}>
               Posted: {format(new Date(datePosted), "yyyy-MM-dd hh:mm")}

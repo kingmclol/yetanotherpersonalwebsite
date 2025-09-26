@@ -1,9 +1,5 @@
-import BlogCard from "../features/blog/BlogCard";
-import BlogPost from "./BlogPost";
-import { usePosts } from "../features/blog/usePosts";
-import LoadingAnimation from "../ui/LoadingAnimation";
-import PageTitle from "../ui/PageTitle";
 import BlogList from "../features/blog/BlogList";
+import PageTitle from "../ui/PageTitle";
 
 function Blog() {
   return (

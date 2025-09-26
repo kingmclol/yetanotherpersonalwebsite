@@ -28,3 +28,10 @@ I chose to use the second option because like i'm not going to bother. It's just
 - pagination for projects (much much later)
 - sorting + filter projects
 - about page
+- blog post comments
+- moderation tools (bulk delete comments)
+- blog post pagination
+- code syntax highlighting support
+- tab support in blog editor
+- cleanup dead code
+- anon users only pull published posts from database

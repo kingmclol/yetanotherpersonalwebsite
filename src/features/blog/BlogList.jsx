@@ -1,10 +1,14 @@
+import { useNavigate } from "react-router-dom";
+import Button from "../../ui/Button";
 import LoadingAnimation from "../../ui/LoadingAnimation";
 import Section from "../../ui/Section";
 import { fadeInFromLeft, noAnimation } from "../../utils/animationVariants";
 import BlogCard from "./BlogCard";
 import { usePosts } from "./usePosts";
+import BlogCardEmpty from "./BlogCardEmpty";
 
 function BlogList() {
+  const navigate = useNavigate();
   const { posts, isLoading } = usePosts();
   return (
     <div className="flex min-w-xl items-center justify-center">
@@ -37,6 +41,7 @@ function BlogList() {
           {posts.map((post) => (
             <BlogCard key={post.id} post={post} />
           ))}
+          <BlogCardEmpty/>
         </Section>
       )}
     </div>

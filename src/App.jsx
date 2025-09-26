@@ -22,6 +22,7 @@ import Project from "./pages/Project";
 import ProjectEditor from "./features/projects/ProjectEditor";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import BlogPostEditor from "./features/blog/BlogPostEditor";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +72,10 @@ function App() {
                 />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
+                <Route
+                  path="/blog/new"
+                  element={<BlogPostEditor post={null} />}
+                />
               </Route>
             </Routes>
           </ErrorBoundary>
