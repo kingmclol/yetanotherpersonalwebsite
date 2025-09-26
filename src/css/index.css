@@ -20,7 +20,7 @@ body {
 @custom-variant light (&:where(.light, .light *));
 
 /* Thanks gpt for the help on making the code background extend more than content height, color choices are mine though */
-.prose code {
+.prose :not(pre) > code {
   @apply inline-flex h-6 items-center rounded bg-slate-900 px-2 font-normal text-slate-300;
 }
 
