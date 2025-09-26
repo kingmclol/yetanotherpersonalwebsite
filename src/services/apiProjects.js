@@ -157,6 +157,7 @@ export async function updateProject(id, updatedProject) {
       .from("projects")
       .update({ ...updatedProject, image: imagePath })
       .eq("id", id)
+      .select()
       .single();
 
     if (error) {
@@ -175,6 +176,7 @@ export async function updateProject(id, updatedProject) {
       .from("projects")
       .update({ ...updatedProject })
       .eq("id", id)
+      .select()
       .single();
 
     if (error) {

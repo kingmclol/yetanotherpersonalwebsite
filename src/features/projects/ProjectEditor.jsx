@@ -15,7 +15,7 @@ import Button from "../../ui/Button";
 import DangerZoneEditing from "../../ui/DangerZoneEditing";
 import Divider from "../../ui/Divider";
 import Modal from "../../ui/Modal";
-import ToolListEditing from "../../ui/ToolListEditor";
+import ToolListEditor from "../../ui/ToolListEditor";
 import { buttonVariants } from "../../utils/animationVariants";
 import { isSameMonthOrBefore } from "../../utils/helpers";
 import { useUser } from "../auth/useUser";
@@ -277,7 +277,7 @@ function ProjectEditor({ project }) {
         </div>
       </div>
       <Divider noAnimate spacing="small" />
-      <ul className="flex max-w-2xl flex-wrap items-center justify-center gap-2">
+      <ul className="flex max-w-3xl mx-auto flex-wrap items-center justify-center gap-2">
         <li>
           <input
             id="tool_main"
@@ -287,7 +287,7 @@ function ProjectEditor({ project }) {
             disabled={isWorking}
           />
         </li>
-        <ToolListEditing
+        <ToolListEditor
           mainTool={getValues().tool_main.toLowerCase()}
           otherTools={otherTools}
           addTool={(tool) =>
