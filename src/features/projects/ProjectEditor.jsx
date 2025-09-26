@@ -11,15 +11,13 @@ import {
   HiOutlineFingerPrint,
   HiOutlineUsers,
 } from "react-icons/hi2";
-import { useNavigate } from "react-router-dom";
 import Button from "../../ui/Button";
+import DangerZoneEditing from "../../ui/DangerZoneEditing";
 import Divider from "../../ui/Divider";
 import Modal from "../../ui/Modal";
 import ToolListEditing from "../../ui/ToolListEditor";
 import { buttonVariants } from "../../utils/animationVariants";
 import { isSameMonthOrBefore } from "../../utils/helpers";
-import AuthStatusTag from "../auth/AuthStatusTag";
-import LoginForm from "../auth/LoginForm";
 import { useUser } from "../auth/useUser";
 import ProjectImage from "./ProjectImage";
 import { useAddProject } from "./useAddProject";
@@ -64,7 +62,6 @@ function ProjectEditor({ project }) {
   const { updateProject, isUpdating } = useUpdateProject();
   const { addProject, isAdding } = useAddProject();
   const isWorking = isUpdating || isAdding;
-  const navigate = useNavigate();
   const { register, handleSubmit, getValues, control } = useForm({
     defaultValues: formFields,
   });
@@ -307,58 +304,17 @@ function ProjectEditor({ project }) {
         <textarea
           id="description"
           placeholder="Project description"
-          className="field-sizing-content min-h-96 w-full max-w-2xl rounded-xl bg-slate-700 px-4 py-2 whitespace-pre-wrap"
+          className="field-sizing-content min-h-96 w-full max-w-3xl rounded-xl bg-slate-700 px-4 py-2 whitespace-pre-wrap"
           {...register("description")}
           disabled={isWorking}
         />
       </div>
       <Divider noAnimate />
-      <div className="flex flex-col items-center justify-center">
-        <div>
-          You are currently <AuthStatusTag />
-        </div>
-        <div className="my-4 flex gap-4">
-          <Button
-            type="button"
-            onClick={() => navigate(-1)}
-            disabled={isWorking}
-          >
-            Cancel
-          </Button>
-          <Modal>
-            <Modal.Open
-              target="login"
-              renderButton={(openFunc) => (
-                <Button
-                  disabled={isWorking}
-                  type={isAuthenticated ? "submit" : "button"}
-                  onClick={
-                    isAuthenticated
-                      ? undefined
-                      : handleSubmit(
-                          // if form valid open login modal
-                          () => openFunc(),
-                          // if form errored toast errors
-                          onError,
-                        )
-                  }
-                  className="rounded-full bg-red-700 px-4 py-2 text-white"
-                >
-                  Save
-                </Button>
-              )}
-            />
-
-            <Modal.Window
-              titleText="Your free trial has expired."
-              name="login"
-              renderChildren={(closeFunc) => (
-                <LoginForm onSuccess={closeFunc} />
-              )}
-            />
-          </Modal>
-        </div>
-      </div>
+      <DangerZoneEditing
+        handleSubmit={handleSubmit}
+        isWorking={isWorking}
+        onError={onError}
+      />
     </form>
   );
 }

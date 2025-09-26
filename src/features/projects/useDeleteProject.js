@@ -16,7 +16,7 @@ export function useDeleteProject() {
       // Seems like the project page is mounted for just a moment before we navigate away, so a request is fired
       // and of course gets no data. So cancel the request well that doesn't work
       // Fuck it i'm going to just try to stop it somehow
-			// Nope i can't stop it time to just live with it now
+      // Nope i can't stop it time to just live with it now
       queryClient.invalidateQueries({
         queryKey: ["project", data.slug],
         exact: true,
@@ -31,7 +31,7 @@ export function useDeleteProject() {
 
       // Remove project from query cache
       // Technically maybe possible to take projects query then filter out the deleted project
-			// But like i'm the only one tho can delete stuff anyways so no point
+      // But like i'm the only one tho can delete stuff anyways so no point
       queryClient.invalidateQueries(["projects"]);
       queryClient.removeQueries({
         queryKey: ["project", data.slug],

@@ -1,16 +1,22 @@
+import { useNavigate } from "react-router-dom";
+import Button from "../../ui/Button";
 import LoadingAnimation from "../../ui/LoadingAnimation";
 import Section from "../../ui/Section";
 import { fadeInFromLeft, noAnimation } from "../../utils/animationVariants";
-import ProjectCard from "./ProjectCard";
-import ProjectCardEmpty from "./ProjectCardEmpty";
-function ProjectList({ projects, isLoading }) {
+import BlogCard from "./BlogCard";
+import { usePosts } from "./usePosts";
+import BlogCardEmpty from "./BlogCardEmpty";
+
+function BlogList() {
+  const navigate = useNavigate();
+  const { posts, isLoading } = usePosts();
   return (
     <div className="flex min-w-xl items-center justify-center">
       {isLoading ? (
         <div>
           <LoadingAnimation />
         </div>
-      ) : projects.length === 0 ? (
+      ) : posts.length === 0 ? (
         <Section
           key="nodata"
           layout
@@ -23,23 +29,23 @@ function ProjectList({ projects, isLoading }) {
             className="mx-auto h-32 w-32"
           />
           <h1 className="text-center text-xl font-bold tracking-wide">
-            I couldn't find any project data??? RIP my Supabase???
+            I couldn't find any posts data??? RIP my Supabase???
           </h1>
         </Section>
       ) : (
         <Section
-          key={projects.map((p) => `${p.id}:${p.updated_at}`).join(",")}
+          key={posts.map((p) => `${p.id}:${p.updated_at}`).join(",")}
           variants={noAnimation}
-          className="grid lg:grid-cols-2 gap-4"
+          className="flex flex-col gap-4"
         >
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {posts.map((post) => (
+            <BlogCard key={post.id} post={post} />
           ))}
-          <ProjectCardEmpty />
+          <BlogCardEmpty/>
         </Section>
       )}
     </div>
   );
 }
 
-export default ProjectList;
+export default BlogList;

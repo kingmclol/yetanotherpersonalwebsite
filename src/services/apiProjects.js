@@ -1,4 +1,3 @@
-import { el } from "date-fns/locale";
 import { isFile } from "../utils/helpers";
 import { supabase } from "./supabase";
 

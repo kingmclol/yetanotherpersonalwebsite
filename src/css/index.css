@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
 
 body {
   @apply bg-slate-900 font-mono text-slate-300;
@@ -18,6 +19,16 @@ body {
 /* Light variant like light:bg-sky-50 */
 @custom-variant light (&:where(.light, .light *));
 
-li {
-  @apply list-none;
+/* Thanks gpt for the help on making the code background extend more than content height, color choices are mine though */
+.prose code {
+  @apply inline-flex h-6 items-center rounded bg-slate-900 px-2 font-normal text-slate-300;
+}
+
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
+.prose blockquote {
+  @apply text-slate-400
 }

@@ -1,5 +1,7 @@
+import { format } from "date-fns";
 import { motion } from "motion/react";
 import { HiMiniArrowTopRightOnSquare, HiOutlineUsers } from "react-icons/hi2";
+import DangerZone from "../../pages/DangerZone";
 import Button from "../../ui/Button";
 import Divider from "../../ui/Divider";
 import Modal from "../../ui/Modal";
@@ -12,10 +14,10 @@ import {
   fadeInFromLeft,
   fadeInFromRight,
 } from "../../utils/animationVariants";
-import ProjectDangerZone from "./ProjectDangerZone";
 import ProjectImage from "./ProjectImage";
-import { format } from "date-fns";
+import { useDeleteProject } from "./useDeleteProject";
 function ProjectFullView({ project, onStartEditing }) {
+  const { isDeleting, deleteProject } = useDeleteProject();
   const {
     start_date: startDate,
     end_date: endDate,
@@ -26,6 +28,7 @@ function ProjectFullView({ project, onStartEditing }) {
     description,
     tool_main: mainTool,
     tool_others: otherTools,
+    id,
   } = project;
 
   return (
@@ -106,7 +109,13 @@ function ProjectFullView({ project, onStartEditing }) {
         {description}
       </Section>
       <Divider />
-      <ProjectDangerZone project={project} onStartEditing={onStartEditing} />
+      <DangerZone
+        resourceType="Project"
+        resourceId={id}
+        onStartEditing={onStartEditing}
+        deleteResource={deleteProject}
+        isDeleting={isDeleting}
+      />
     </>
   );
 }
