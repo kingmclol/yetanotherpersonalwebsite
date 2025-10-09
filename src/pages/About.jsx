@@ -199,7 +199,7 @@ function About() {
         <SectionHeader>Alright, I lied. Here you go.</SectionHeader>
         <motion.img
           variants={fadeInFromBottom}
-          src="/me.jpg"
+          src="https://smcmradcaegdmqovagxx.supabase.co/storage/v1/object/public/misc-images/me.jpg"
           alt="literally me"
           className="rounded-lg"
         />
