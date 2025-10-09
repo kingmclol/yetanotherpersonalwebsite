@@ -46,16 +46,16 @@ function Home() {
         staggerChildren={1}
       >
         <h2 className="mb-4 text-2xl font-semibold tracking-wide not-italic">
-          Welcome to my website. Everything is quite messy, though.
+          Hi, I'm Freeman Wang. Welcome to my website.
         </h2>
         <motion.p variants={fadeInFromBottom}>
-          ...I definitely shouldn't have tried motion.
+          Everything is quite messy though.
         </motion.p>
         <motion.p variants={fadeInFromBottom}>
-          I literally cannot debug this stuff
+          But hey, it seems to work okay!
         </motion.p>
         <motion.p variants={fadeInFromBottom}>
-          ...but animations are cool...
+          Just don't access this on mobile yet...
         </motion.p>
       </Section>
       <Divider noAnimate />
