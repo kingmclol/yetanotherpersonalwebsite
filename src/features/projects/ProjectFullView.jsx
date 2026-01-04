@@ -16,6 +16,7 @@ import {
 } from "../../utils/animationVariants";
 import ProjectImage from "./ProjectImage";
 import { useDeleteProject } from "./useDeleteProject";
+import Markdown from "react-markdown";
 function ProjectFullView({ project, onStartEditing }) {
   const { isDeleting, deleteProject } = useDeleteProject();
   const {
@@ -104,9 +105,9 @@ function ProjectFullView({ project, onStartEditing }) {
       <Divider variants={fadeIn} spacing="small" />
       <Section
         variants={fadeInFromBottom}
-        className="mx-auto min-h-96 max-w-2xl whitespace-pre-wrap"
+        className="prose prose-invert mx-auto min-h-96 max-w-3xl bg-slate-800 p-4 rounded-xl"
       >
-        {description}
+        <Markdown>{description}</Markdown>
       </Section>
       <Divider />
       <DangerZone

@@ -180,18 +180,6 @@ function About() {
               doesn't?
             </motion.p>
           </QACard>
-          <QACard title="This really feels similar to a way of defining AI character cards.">
-            <motion.p variants={fadeInFromLeft}>
-              You're right. I realized that too. This was not my intention, I
-              just wanted to reuse my QAList component.
-            </motion.p>
-            <motion.p variants={fadeInFromLeft}>
-              But hey, maybe there's a reason people do that. It could be an
-              optimal way to define a character, or in this case, understand
-              what kind of person I am. I'm sure I provided enough hints for you
-              to get a good idea, if you were able to read up to this point.
-            </motion.p>
-          </QACard>
         </QAList>
       </Section>
       <Divider />
