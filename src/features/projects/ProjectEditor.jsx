@@ -22,16 +22,6 @@ import { useUser } from "../auth/useUser";
 import ProjectImage from "./ProjectImage";
 import { useAddProject } from "./useAddProject";
 import { useUpdateProject } from "./useUpdateProject";
-// This shit is the worst thing I've ever made in this website what the fuck
-// I have no fucking clue how to manage everything since things are not standard forms + layout hell
-// Why the hell did i decide to make the form accessible to non auth users
-// There's nothing to show off man this is garbage
-// i'll just do all controlled component even though its messy asf otherwise i get nowhere
-
-// Ahhahahha select options are not stylable i gotta use another library fuck this im going to make it so only i can use it
-// then screw everything i know how to format my stuff anyways
-
-// Well gpt is gonna need to carry me with this i guess because why do timezones exist
 
 // by far the worst file
 // TODO: add image updating logic rip me im gonna die
