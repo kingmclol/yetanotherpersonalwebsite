@@ -34,6 +34,7 @@ function ToolListEditor({
           <span>{tool}</span>
           <button
             onClick={() => removeTool(idx)}
+            type="button"
             className="flex cursor-pointer items-center rounded-full p-0.5 hover:bg-slate-500"
             disabled={disabled}
           >
@@ -46,7 +47,12 @@ function ToolListEditor({
           className="flex w-32 items-center justify-between gap-1 rounded-full border-2 border-slate-700 bg-slate-600 px-2 py-0.5 text-sm font-semibold tracking-wider text-slate-100 uppercase"
           placeholder="Add tag..."
           value={tempTool}
-          onKeyDown={(e) => e.code === "Enter" && handleAddTool(tempTool)}
+          onKeyDown={(e) => {
+            if (e.code === "Enter") {
+              e.preventDefault();
+              handleAddTool(tempTool);
+            }
+          }}
           onChange={(e) => setTempTool(e.target.value.toLowerCase())}
           disabled={disabled}
         />

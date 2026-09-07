@@ -5,7 +5,7 @@ function Button({
   className = "px-4 py-2 bg-slate-700 rounded-full",
   onClick,
   children,
-  type,
+  type = "button",
   disabled,
 }) {
   return (
