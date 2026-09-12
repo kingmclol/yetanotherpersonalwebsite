@@ -5,7 +5,7 @@ function SectionList({
   children,
   className = "flex flex-col gap-4 justify-center items-center",
   animateOnce = false,
-  staggerChildren = 0.2,
+  staggerChildren = 0.15,
   delayChildren = 0,
   variants = noAnimation,
 }) {

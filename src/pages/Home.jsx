@@ -4,6 +4,7 @@ import {
   HiMiniArrowTopRightOnSquare,
   HiOutlineCircleStack,
   HiOutlineInformationCircle,
+  HiOutlineNewspaper,
   HiOutlineUser,
 } from "react-icons/hi2";
 import { usePreferences } from "../contexts/PreferencesProvider";
@@ -49,31 +50,31 @@ function Home() {
           Hi, I'm Freeman Wang. Welcome to my website.
         </h2>
         <motion.p variants={fadeInFromBottom}>
-          Everything is quite messy though.
+          This was my first large solo project.
         </motion.p>
         <motion.p variants={fadeInFromBottom}>
-          But hey, it seems to work okay!
+          Obviously, it did not age well.
         </motion.p>
         <motion.p variants={fadeInFromBottom}>
-          Just don't access this on mobile yet...
+          I hope you have a nice time here.
         </motion.p>
       </Section>
       <Divider noAnimate />
       <motion.div className="mb-[60vh] flex items-center justify-center gap-2 text-center">
-        <FaAnglesDown /> Scroll down for some Not very FAQ (and to let the
+        <FaAnglesDown /> Scroll down for some Not Very FAQ (and to let the
         animations trigger)
         <FaAnglesDown />
       </motion.div>
 
       <Divider />
       <Section className="rounded-md px-4">
-        <SectionHeader>Not very FAQ</SectionHeader>
+        <SectionHeader>Not Very FAQ</SectionHeader>
         <QAList>
           <QACard
             title={
               reducedMotion
                 ? "Wait, this looks terrible. Can I get motion back?"
-                : "I don't like motion. Where reduce motion button?"
+                : "I don't like animations. Where reduce motion button?"
             }
           >
             {
@@ -138,27 +139,33 @@ function Home() {
       <Divider />
       <Section>
         <SectionHeader>
-          Head on over to one of THREE brand-new pages for some new content!
+          Head on over to one of FOUR pages for some new content!
         </SectionHeader>
 
         <SectionList>
           <LinkCard
             to="/about"
             name="About"
-            comment="Extra stuff about me"
+            comment="Not worth looking at"
             Icon={HiOutlineInformationCircle}
           />
           <LinkCard
             to="/projects"
             name="Projects"
-            comment="I can't think of a comment to put here"
+            comment="What have I been doing with this degree???"
             Icon={HiOutlineCircleStack}
           />
           <LinkCard
             to="/contact"
             name="Contact"
-            comment="Stuff you can see in the footer"
+            comment="...or you can check the footer"
             Icon={HiOutlineUser}
+          />
+          <LinkCard
+            to="/blog"
+            name="Blog"
+            comment="The comments are fake, I'm never adding them btw"
+            Icon={HiOutlineNewspaper}
           />
         </SectionList>
         {/* <motion.div className="grid grid-cols-3 gap-2">

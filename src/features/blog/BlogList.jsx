@@ -1,5 +1,6 @@
 import LoadingAnimation from "../../ui/LoadingAnimation";
 import Section from "../../ui/Section";
+import SectionList from "../../ui/SectionList";
 import { fadeInFromLeft, noAnimation } from "../../utils/animationVariants";
 import BlogCard from "./BlogCard";
 import BlogCardEmpty from "./BlogCardEmpty";
@@ -30,16 +31,17 @@ function BlogList() {
           </h1>
         </Section>
       ) : (
-        <Section
+        <SectionList
           key={posts.map((p) => `${p.id}:${p.updated_at}`).join(",")}
-          variants={noAnimation}
           className="flex flex-col gap-4"
+          staggerChildren={0.15}
+          animateOnce
         >
           {posts.map((post) => (
             <BlogCard key={post.id} post={post} />
           ))}
           <BlogCardEmpty/>
-        </Section>
+        </SectionList>
       )}
     </div>
   );
