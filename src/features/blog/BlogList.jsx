@@ -39,9 +39,6 @@ function BlogList() {
           {posts.map((post) => (
             <BlogCard key={post.id} post={post} />
           ))}
-          {
-            Array(100).fill().map((_, i) => <BlogCardEmpty key={i} />)
-          }
           <BlogCardEmpty/>
         </SectionList>
       )}
