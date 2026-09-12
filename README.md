@@ -1,11 +1,22 @@
-# Personal website
+# Yet Another Personal Website
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5dea8439-4a7f-4f92-8912-5e7d1d7536e2/deploy-status)](https://app.netlify.com/projects/yetanotherpersonalwebsite/deploys)
 
-Under development until \[unknown time]
+Yet another personal website. Fairly self-explanatory.
 
-Made with React
+Poorly made full-stack website to practice React with in-app editable project and blog content.
+
+## Technologies Used
+Frontend:
+- React + Vite
+- TailwindCSS
+- React Query
+- Supabase client
+
+"Backend":
+- Supabase
 
 ## Known Problems
-
+*Everything after here is from the old `README.md` and is basically not important. I'll remove it eventually once I overhaul this entirely*
 ### Projects list fails to animate/has blank spots/animates twice
 
 This is a problem that seems to be from an interaction between react motion and react query—for a brief moment, the `Projects` page uses _stale_ data from the react query cache, and the project list would begin to animate using said data.
