@@ -32,7 +32,7 @@ function ProjectList({ projects, isLoading }) {
           key={projects.map((p) => `${p.id}:${p.updated_at}`).join(",")}
           className="grid lg:grid-cols-2 gap-4 items-stretch"
           childrenUseViewport
-          childVariants={fadeInFromBottom}
+          childVariants={fadeInFromLeft}
         >
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />

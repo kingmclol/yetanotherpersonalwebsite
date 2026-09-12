@@ -12,6 +12,7 @@ function SectionList({
   childClassName = "",
   childVariants = fadeInFromLeft,
   variants = noAnimation,
+  amount = "some",
 }) {
   const items = React.Children.toArray(children);
 
@@ -20,7 +21,7 @@ function SectionList({
     whileInView: "animate",
     exit: "exit",
     viewport: {
-      amount: "some",
+      amount: amount,
       once: animateOnce,
     },
   };
@@ -38,7 +39,7 @@ function SectionList({
       }}
       viewport={{
         once: animateOnce,
-        amount: "some",
+        amount: amount,
       }}
     >
       {items.map((el, index) => (

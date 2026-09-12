@@ -4,8 +4,8 @@ import { motion } from "motion/react";
 import { HiOutlineUsers } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import Divider from "../../ui/Divider";
-import { fadeInFromBottom } from "../../utils/animationVariants";
 import ProjectImage from "./ProjectImage";
+import Markdown from "react-markdown";
 
 const MotionLink = motion.create(Link);
 function ProjectCard({ project }) {
@@ -24,7 +24,6 @@ function ProjectCard({ project }) {
     <MotionLink
       to={`/project/${slug}`}
       onClick={() => queryClient.setQueryData(["project", slug], project)}
-      variants={fadeInFromBottom}
       whileHover={{
         scale: 1.02,
       }}
@@ -45,7 +44,7 @@ function ProjectCard({ project }) {
             {tagline && `"${tagline}"`}
           </p>
           <Divider noAnimate spacing="tiny" />
-          <p className="line-clamp-3 px-4 whitespace-pre-wrap">{description}</p>
+          <p className="line-clamp-3 px-4 whitespace-pre-wrap prose-slate prose prose-invert"><Markdown>{description}</Markdown></p>
         </div>
       </div>
       <div className="flex justify-between px-4 py-2 text-gray-400">

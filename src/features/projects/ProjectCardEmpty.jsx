@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import { fadeInFromBottom } from "../../utils/animationVariants";
 import { HiPlus } from "react-icons/hi2";
 
 const MotionLink = motion.create(Link);
@@ -9,7 +8,6 @@ function ProjectCardEmpty() {
   return (
     <MotionLink
       to="/project/new"
-      variants={fadeInFromBottom}
       whileHover={{
         scale: 1.02,
       }}
