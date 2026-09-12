@@ -3,7 +3,6 @@ import { HiLockClosed, HiLockOpen } from "react-icons/hi";
 import { HiCalendarDays, HiChatBubbleLeftEllipsis } from "react-icons/hi2";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import { fadeInFromBottom } from "../../utils/animationVariants";
 import { useQueryClient } from "@tanstack/react-query";
 
 const MotionLink = motion.create(Link);
@@ -28,14 +27,13 @@ function BlogCard({ post }) {
     <MotionLink
       to={`/blog/${id}`}
       onClick={() => queryClient.setQueryData(["post", id], post)}
-      variants={fadeInFromBottom}
       whileHover={{
         scale: 1.02,
       }}
       whileTap={{
         scale: 0.96,
       }}
-      className={`flex cursor-pointer rounded-xl border-4 px-4 py-2 transition-colors ${getColors(published)}`}
+      className={`flex w-full cursor-pointer rounded-xl border-4 px-4 py-2 transition-colors ${getColors(published)}`}
     >
       <div className="flex-1">
         <h2

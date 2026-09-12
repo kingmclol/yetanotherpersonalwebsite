@@ -1,17 +1,33 @@
 import { motion, stagger } from "motion/react";
-import { noAnimation } from "../utils/animationVariants";
+import { fadeInFromLeft, noAnimation } from "../utils/animationVariants";
+import React from "react";
 
 function SectionList({
   children,
-  className = "flex flex-col gap-4 justify-center items-center",
+  className = "",
   animateOnce = false,
   staggerChildren = 0.15,
   delayChildren = 0,
+  childrenUseViewport = false,
+  childClassName = "",
+  childVariants = fadeInFromLeft,
   variants = noAnimation,
 }) {
+  const items = React.Children.toArray(children);
+
+  const childViewportProps = {
+    initial: "initial",
+    whileInView: "animate",
+    exit: "exit",
+    viewport: {
+      amount: "some",
+      once: animateOnce,
+    },
+  };
+
   return (
     <motion.ul
-      className={className}
+      className={`flex flex-col gap-4 justify-center items-center ${className}`}
       variants={variants}
       initial="initial"
       whileInView="animate"
@@ -20,13 +36,22 @@ function SectionList({
           startDelay: delayChildren,
         }),
       }}
-      exit="exit"
       viewport={{
         once: animateOnce,
         amount: "some",
       }}
     >
-      {children}
+      {items.map((el, index) => (
+        <motion.li
+          key={el?.key ?? index}
+          className={`w-full flex items-center justify-center ${childClassName}`}
+          variants={childVariants}
+          {...(childrenUseViewport ? childViewportProps : {})}
+          tabIndex={-1}
+        >
+          {el}
+        </motion.li>
+      ))}
     </motion.ul>
   );
 }

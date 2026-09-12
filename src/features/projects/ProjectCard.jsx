@@ -31,7 +31,7 @@ function ProjectCard({ project }) {
       whileTap={{
         scale: 0.96,
       }}
-      className="flex min-h-96 cursor-pointer flex-col rounded-xl border-4 border-slate-600 bg-slate-700 transition-colors hover:border-slate-400"
+      className="flex h-full min-h-96 w-full cursor-pointer flex-col rounded-xl border-4 border-slate-600 bg-slate-700 transition-colors hover:border-slate-400"
     >
       <div className="aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-800">
         <ProjectImage alt={title} image={imagePath} />

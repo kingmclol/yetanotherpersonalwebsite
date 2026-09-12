@@ -1,9 +1,10 @@
 import { motion, stagger } from "motion/react";
-import { fadeInFromBottom, fadeInFromLeft } from "../utils/animationVariants";
-function QACard({ title, children }) {
+import { fadeInFromBottom, fadeInFromLeft, noAnimation } from "../utils/animationVariants";
+import SectionList from "./SectionList";
+function QACard({ title, children, variants = noAnimation }) {
   return (
-    <motion.li
-      variants={fadeInFromBottom}
+    <motion.div
+      variants={variants}
       transition={{ delayChildren: stagger(0.2) }}
     >
       <motion.h2
@@ -12,14 +13,15 @@ function QACard({ title, children }) {
       >
         Q: {title}
       </motion.h2>
-      <motion.div
-        variants={fadeInFromLeft}
-        transition={{ delayChildren: stagger(0.1) }}
+      <SectionList
+        childVariants={fadeInFromLeft}
+        childrenUseViewport
         className="ml-8 max-w-2xl space-y-4"
+        childClassName="justify-left"
       >
         {children}
-      </motion.div>
-    </motion.li>
+      </SectionList>
+    </motion.div>
   );
 }
 

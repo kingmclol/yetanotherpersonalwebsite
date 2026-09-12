@@ -36,7 +36,7 @@ function About() {
           If you <em>really</em> want to see what I look like{" "}
           <small>(...why?)</small> an image is available in my{" "}
           <Anchor
-            href={contacts.find((contact) => contact.name === "LinkedIn")}
+            href={contacts.find((contact) => contact.name === "LinkedIn").url}
             openNewTab
           >
             LinkedIn
@@ -184,10 +184,10 @@ function About() {
       </Section>
       <Section className="mt-[100vh]">
         <SectionHeader>Alright, I lied. Here you go.</SectionHeader>
-        <motion.p className="text-center pb-4">
+        <motion.p className="text-center pb-4" variants={fadeInFromBottom}>
           It's the same one in my{" "}
           <Anchor
-            href={contacts.find((contact) => contact.name === "LinkedIn")}
+            href={contacts.find((contact) => contact.name === "LinkedIn").url}
             openNewTab
           >
             LinkedIn

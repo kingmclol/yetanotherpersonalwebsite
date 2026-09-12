@@ -16,7 +16,7 @@ function ProjectCardEmpty() {
       whileTap={{
         scale: 0.96,
       }}
-      className="flex min-h-96 cursor-pointer flex-col items-center justify-center rounded-xl border-4 border-slate-600 bg-inherit text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-400"
+      className="flex h-full min-h-96 w-full cursor-pointer flex-col items-center justify-center rounded-xl border-4 border-slate-600 bg-inherit text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-400"
     >
       {/* <h2 className="font-extrabold text-8xl tracking-wider">ADD</h2> */}
       <HiPlus className="h-24 w-24" strokeWidth={3} />

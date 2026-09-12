@@ -25,7 +25,7 @@ function Contact() {
       <Divider />
       <Section staggerChildren={0.2}>
         <SectionHeader>Extras</SectionHeader>
-        <motion.p
+        <motion.div
           className="flex flex-col items-center justify-center gap-4"
           variants={fadeInFromLeft}
         >
@@ -46,7 +46,7 @@ function Contact() {
           >
             Boring. I want to cause an error, because I can!!1!!!1!1!1
           </Link>
-        </motion.p>
+        </motion.div>
       </Section>
       <Divider />
       <Section className="text-center" staggerChildren={0.2}>

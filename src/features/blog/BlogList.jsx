@@ -34,12 +34,14 @@ function BlogList() {
         <SectionList
           key={posts.map((p) => `${p.id}:${p.updated_at}`).join(",")}
           className="flex flex-col gap-4"
-          staggerChildren={0.15}
-          animateOnce
+          childrenUseViewport
         >
           {posts.map((post) => (
             <BlogCard key={post.id} post={post} />
           ))}
+          {
+            Array(100).fill().map((_, i) => <BlogCardEmpty key={i} />)
+          }
           <BlogCardEmpty/>
         </SectionList>
       )}

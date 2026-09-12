@@ -1,6 +1,7 @@
 import LoadingAnimation from "../../ui/LoadingAnimation";
 import Section from "../../ui/Section";
-import { fadeInFromLeft, noAnimation } from "../../utils/animationVariants";
+import SectionList from "../../ui/SectionList";
+import { fadeInFromBottom, fadeInFromLeft, noAnimation } from "../../utils/animationVariants";
 import ProjectCard from "./ProjectCard";
 import ProjectCardEmpty from "./ProjectCardEmpty";
 function ProjectList({ projects, isLoading }) {
@@ -11,11 +12,11 @@ function ProjectList({ projects, isLoading }) {
           <LoadingAnimation />
         </div>
       ) : projects.length === 0 ? (
-        <Section
+        <SectionList
           key="nodata"
           layout
-          variants={fadeInFromLeft}
           className="flex w-xl flex-col items-center justify-center gap-8"
+          childVariants={fadeInFromBottom}
         >
           <img
             src="/amber_upset.webp"
@@ -25,18 +26,19 @@ function ProjectList({ projects, isLoading }) {
           <h1 className="text-center text-xl font-bold tracking-wide">
             I couldn't find any project data??? RIP my Supabase???
           </h1>
-        </Section>
+        </SectionList>
       ) : (
-        <Section
+        <SectionList
           key={projects.map((p) => `${p.id}:${p.updated_at}`).join(",")}
-          variants={noAnimation}
-          className="grid lg:grid-cols-2 gap-4"
+          className="grid lg:grid-cols-2 gap-4 items-stretch"
+          childrenUseViewport
+          childVariants={fadeInFromBottom}
         >
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
           <ProjectCardEmpty />
-        </Section>
+        </SectionList>
       )}
     </div>
   );
