@@ -3,11 +3,9 @@ import { fadeInFromBottom, fadeInFromLeft } from "../utils/animationVariants";
 import SectionList from "./SectionList";
 function QAList({ children }) {
   return (
-    <SectionList
-      childVariants={fadeInFromLeft}
-      childrenUseViewport
-
-    >{children}</SectionList>
+    <SectionList childVariants={fadeInFromLeft} childrenUseViewport>
+      {children}
+    </SectionList>
 
     // <motion.ul
     //   variants={fadeInFromBottom}

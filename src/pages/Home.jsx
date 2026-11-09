@@ -142,7 +142,7 @@ function Home() {
           Head on over to one of FOUR pages for some new content!
         </SectionHeader>
 
-        <SectionList>
+        <SectionList childClassName="justify-center" className="w-full">
           <LinkCard
             to="/about"
             name="About"

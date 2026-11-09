@@ -28,7 +28,7 @@ function SectionList({
 
   return (
     <motion.ul
-      className={`flex flex-col gap-4 justify-center ${className}`}
+      className={`mx-auto flex w-fit flex-col items-center gap-4 ${className}`}
       variants={variants}
       initial="initial"
       whileInView="animate"
@@ -45,7 +45,7 @@ function SectionList({
       {items.map((el, index) => (
         <motion.li
           key={el?.key ?? index}
-          className={`w-full flex items-center ${childClassName}`}
+          className={`flex w-full items-center ${childClassName}`}
           variants={childVariants}
           {...(childrenUseViewport ? childViewportProps : {})}
           tabIndex={-1}

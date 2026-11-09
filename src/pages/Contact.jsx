@@ -17,7 +17,7 @@ function Contact() {
   return (
     <>
       <PageTitle title="Contacts" subtitle="Plus extra stuff not in footer" />
-      <SectionList>
+      <SectionList childClassName="justify-center" className="w-full">
         {contacts.map((contact) => (
           <ContactCard contact={contact} key={contact.name} />
         ))}
